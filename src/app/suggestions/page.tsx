@@ -397,6 +397,7 @@ export default function SuggestionsPage() {
   const personaParam = searchParams.get("persona");
 
   const gender = genderParam === "male" ? "male" : "female";
+  const persona = personaParam ||null;
 
   const outfitSource =
     gender === "male" ? OUTFITS_MALE : OUTFITS_FEMALE;
