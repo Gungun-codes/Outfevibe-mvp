@@ -380,9 +380,8 @@ export default function SuggestionsQuizPage() {
           <button
             onClick={() => {
               const persona = result.title;
-              router.push(
-                `/suggestions?persona=${encodeURIComponent(persona)}&gender=${gender}`
-              );
+              localStorage.setItem("userPersona", result.title);
+              router.push("/suggestions");
             }}
             className="w-full py-4 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2"
           >
