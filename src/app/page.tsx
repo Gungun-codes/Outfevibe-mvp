@@ -4,11 +4,42 @@ import { useRouter } from "next/navigation";
 import Image from "next/image"
 import { useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
+import {collection, addDoc, serverTimestamp} from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { create } from "domain";
+import { a } from "framer-motion/client";
 
 export default function Home() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
   const router = useRouter();
-  const [selectedGender, setSelectedGender] = useState<"male" | "female">("female")
+  const [selectedGender, setSelectedGender] = useState<"male" | "female">("female");
+  const handleSubmit = async (e: any) => {
+    if(!name || !message) {
+      alert("Please fill in both fields.");
+      return;
+    }
+    try{
+      setLoading(true);
+      await addDoc(collection(db, "feedback"), {
+        name: name,
+        message: message,
+        createdAt: serverTimestamp(),
+    });
+    alert("Feedback submitted successfully!");
+    setName("");
+    setMessage("");
+  } catch (error) {
+    console.error("Error adding feedback:", error);
+    alert("Failed to submit feedback. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const femaleTrending = [
     { id: 1, name: "Power Luxe", desc: "Minimal yet bold.", image: "/trending/power_luxe.jpg" },
@@ -245,11 +276,27 @@ export default function Home() {
             ].map((step, index) => (
               <div
                 key={index}
-                className="relative group p-8 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af7f] transition"
+                className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
               >
 
                 {/* Big Background Number */}
-                <span className="absolute -top-6 left-6 text-7xl font-bold text-white/5 group-hover:text-[#d4af7f]/10 transition">
+                <span className="absolute
+                 -top-4 
+                 -left-2 
+                 text-[72px] 
+                 font-bold 
+                 bg-gradient-to-b
+                 from-[#d4af37]
+                 to-[#b8860b]
+                 bg-clip-text
+                 text-transparent
+                 opacity-20
+                  transition-all 
+                duration-300 
+                group-hover:opacity-40
+                pointer-events-none
+                select-none
+                ">
                   {step.number}
                 </span>
 
@@ -427,6 +474,8 @@ export default function Home() {
               <label className="block text-sm mb-2 text-gray-400">Name</label>
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
                 className="w-full px-5 py-4 rounded-xl bg-black border border-[#2a2a2a] focus:border-[#d4af7f] outline-none transition"
               />
@@ -437,14 +486,20 @@ export default function Home() {
               <label className="block text-sm mb-2 text-gray-400">Message</label>
               <textarea
                 rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder="Tell us what you think..."
                 className="w-full px-5 py-4 rounded-xl bg-black border border-[#2a2a2a] focus:border-[#d4af7f] outline-none transition resize-none"
               />
             </div>
 
             {/* Button */}
-            <button className="w-full py-4 rounded-xl bg-[#d4af7f] text-black font-semibold tracking-wide hover:opacity-90 transition shadow-lg">
-              Submit Feedback
+            <button 
+            onClick={handleSubmit}
+            disabled={loading}
+            className="w-full py-4 rounded-xl bg-[#d4af7f] text-black font-semibold tracking-wide hover:opacity-90 transition shadow-lg"
+            >
+              {loading ? "Submitting..." : "Submit Feedback"}
             </button>
 
           </div>
@@ -467,15 +522,14 @@ export default function Home() {
             </p>
 
             <div className="flex gap-4 mt-6">
-              <div className="w-9 h-9 rounded-full border border-[#333] flex items-center justify-center hover:border-[#d4af7f] hover:text-[#d4af7f] transition cursor-pointer">
-                IG
-              </div>
-              <div className="w-9 h-9 rounded-full border border-[#333] flex items-center justify-center hover:border-[#d4af7f] hover:text-[#d4af7f] transition cursor-pointer">
-                LN
-              </div>
-              <div className="w-9 h-9 rounded-full border border-[#333] flex items-center justify-center hover:border-[#d4af7f] hover:text-[#d4af7f] transition cursor-pointer">
-                TW
-              </div>
+              <a href="https://www.instagram.com/what.gungun?igsh=NDBma3Fzdnp3bG5q" target="_blank" className="circle">
+              IG
+              </a>
+
+<a href="https://www.linkedin.com/in/gungun-jain-1508" target="_blank" className="circle">LN</a>
+
+<a href="https://youtube.com/@heygungun?si=QH1rCAhN-7EeNMvP" target="_blank" className="circle">YT</a>
+
             </div>
           </div>
 
@@ -483,9 +537,9 @@ export default function Home() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Product</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
-              <li className="hover:text-[#d4af7f] transition cursor-pointer">AI Outfit Suggestions</li>
-              <li className="hover:text-[#d4af7f] transition cursor-pointer">Virtual Wardrobe</li>
-              <li className="hover:text-[#d4af7f] transition cursor-pointer">Style Quiz</li>
+              <li> <link href="/outfit" className="hover:text-white transition">AI Outfit Suggestions</link></li>
+              <li className="hover:text-white transition">Virtual Wardrobe </li>
+              <li> <link href="/quiz" className="hover:text-white transition">Style Quiz</link></li>
             </ul>
           </div>
 
@@ -493,9 +547,9 @@ export default function Home() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Company</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
-              <li className="hover:text-[#d4af7f] transition cursor-pointer">About</li>
-              <li className="hover:text-[#d4af7f] transition cursor-pointer">Careers</li>
-              <li className="hover:text-[#d4af7f] transition cursor-pointer">Contact</li>
+              <li><link href="/about" className="hover:text-white transition">About</link></li>
+              <li><link href="/careers" className="hover:text-white transition">Careers</link></li>
+              <li><link href="/contact" className="hover:text-white transition">Contact</link></li>
             </ul>
           </div>
 
@@ -510,9 +564,16 @@ export default function Home() {
               <input
                 type="email"
                 placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-black border border-[#2a2a2a] rounded-l-xl text-sm focus:outline-none focus:border-[#d4af7f]"
               />
-              <button className="px-6 bg-[#d4af7f] text-black font-semibold rounded-r-xl hover:opacity-90 transition">
+              <button 
+              onClick={() =>{
+                if(!email) return alert("Enter Email First!");
+                alert("You Are On The List!");
+              }}
+              className="px-6 bg-[#d4af7f] text-black font-semibold rounded-r-xl hover:opacity-90 transition">
                 Join
               </button>
             </div>
