@@ -1,19 +1,17 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import React from "react";
 import { useSearchParams } from "next/navigation";
 
-/* -------------------- TYPES -------------------- */
+/* ================= TYPES ================= */
 
-export interface OutfitItem {
+interface OutfitItem {
   name: string;
   type: "top" | "bottom" | "shoes" | "accessory" | "outerwear";
   desc?: string;
 }
 
-export interface OutfitSuggestion {
+interface OutfitSuggestion {
   id: string;
   title: string;
   description: string;
@@ -22,7 +20,6 @@ export interface OutfitSuggestion {
   image?: string;
   items: OutfitItem[];
 }
-
 /* -------------------- DATA -------------------- */
 
 const OUTFITS_FEMALE: Record<string, OutfitSuggestion[]> = {
@@ -400,7 +397,6 @@ export default function SuggestionsPage() {
   const personaParam = searchParams.get("persona");
 
   const gender = genderParam === "male" ? "male" : "female";
-  const persona = personaParam || "";
 
   const outfitSource =
     gender === "male" ? OUTFITS_MALE : OUTFITS_FEMALE;
@@ -420,11 +416,12 @@ export default function SuggestionsPage() {
           <h1 className="text-4xl md:text-5xl font-bold">
             Your Curated Fits
           </h1>
-          {persona && (
+
+          {personaParam && (
             <p className="text-gray-400 mt-4 text-lg">
-              Styled for:{" "}
+              Styled for{" "}
               <span className="text-white font-semibold">
-                {persona}
+                {personaParam}
               </span>
             </p>
           )}
@@ -434,13 +431,13 @@ export default function SuggestionsPage() {
           {limitedOutfits.map((outfit) => (
             <div
               key={outfit.id}
-              className="bg-[#111] border border-[#1f1f1f] rounded-2xl overflow-hidden hover:border-white transition"
+              className="bg-[#111] border border-[#1f1f1f] rounded-2xl overflow-hidden hover:border-white transition duration-300"
             >
               {outfit.image && (
                 <img
                   src={outfit.image}
                   alt={outfit.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-52 object-cover"
                 />
               )}
 
