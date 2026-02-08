@@ -396,15 +396,18 @@ const OUTFITS_MALE: Record<string, OutfitSuggestion[]> = {
 export default function SuggestionsPage() {
   const searchParams = useSearchParams();
 
-  const gender = searchParams.get("gender");
-  const persona = searchParams.get("persona");
+  const genderParam = searchParams.get("gender");
+  const personaParam = searchParams.get("persona");
+
+  const gender = genderParam === "male" ? "male" : "female";
+  const persona = personaParam || "";
 
   const outfitSource =
     gender === "male" ? OUTFITS_MALE : OUTFITS_FEMALE;
 
   const personaOutfits =
-    persona && outfitSource[persona]
-      ? outfitSource[persona]
+    personaParam && outfitSource[personaParam]
+      ? outfitSource[personaParam]
       : Object.values(outfitSource).flat();
 
   const limitedOutfits = personaOutfits.slice(0, 4);
