@@ -70,8 +70,7 @@ export default function OutfitChat() {
       (item) =>
         item.gender === gender &&
         item.occasion === occasion &&
-        item.mood === mood &&
-        (color ? item.color === color : true)
+        item.mood === mood
     );
 
     if (filtered.length === 0) filtered = allOutfits;
@@ -81,8 +80,15 @@ export default function OutfitChat() {
   }
 
   function surpriseMe() {
-    const allOutfits = outfits as Outfit[];
-    setResults(pickTwoRandom(allOutfits));
+    const genderFiltered = (outfits as Outfit[]).filter((item) => item.gender === gender);
+    setResults(pickTwoRandom(genderFiltered));
+  }
+  function restyle(){
+    setGender("");
+    setMood("");
+    setOccasion("");
+    setColor("");
+    setResults([]);
   }
 
   function toggleSave(id: number) {
@@ -268,7 +274,7 @@ export default function OutfitChat() {
 
               <div className="flex gap-3 mt-4">
                 <button
-                  onClick={generateLooks}
+                  onClick={restyle}
                   className="border px-4 py-2 rounded-full text-sm"
                 >
                   Restyle
