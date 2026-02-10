@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/lib/firebase";
+import {onAuthStateChanged} from "firebase/auth";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -13,6 +14,15 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const router = useRouter();
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push("/");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +30,10 @@ export default function LoginPage() {
   /* ================= EMAIL LOGIN ================= */
 
   const handleEmailLogin = async () => {
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return;
+    }
     try {
       setError("");
       await signInWithEmailAndPassword(auth, email, password);
@@ -36,6 +50,7 @@ export default function LoginPage() {
       setError("");
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
+      alert("login successful!");
       router.push("/");
     } catch (err: any) {
       setError(err.message);
@@ -48,6 +63,7 @@ export default function LoginPage() {
     try {
       setError("");
       await signInAnonymously(auth);
+      alert("logged in as guest!");
       router.push("/");
     } catch (err: any) {
       setError(err.message);

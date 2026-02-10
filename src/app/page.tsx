@@ -17,6 +17,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleSubmit = async (e: any) => {
+    e.preventDefault(); 
     if (!name || !message) {
       alert("Please fill in both fields.");
       return;
@@ -155,7 +156,7 @@ export default function Home() {
       </section>
 
       {/* TRENDING OUTFITS */}
-      <section className="py-24 bg-black text-white">
+      <section id="trend" className="py-24 bg-black text-white">
         <div className="max-w-6xl mx-auto px-6">
 
           <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
@@ -224,7 +225,7 @@ export default function Home() {
     </section>
 
       {/* ================= ABOUT ================= */ }
-  <section className="py-28 px-6 bg-gradient-to-b from-black to-[#0a0a0a] border-t border-[#1f1f1f]">
+  <section id="about" className="py-28 px-6 bg-gradient-to-b from-black to-[#0a0a0a] border-t border-[#1f1f1f]">
     <div className="max-w-5xl mx-auto text-center">
 
       <h2 className="text-5xl font-bold mb-8">
@@ -318,7 +319,7 @@ export default function Home() {
   </section>
 
   {/* ================= FEATURES ================= */ }
-  <section id="features" className="py-20 px-6 border-t border-[#1f1f1f]">
+  <section id="feature" className="py-20 px-6 border-t border-[#1f1f1f]">
     <div className="max-w-7xl mx-auto">
       <h2 className="text-4xl font-bold text-center mb-16">
         Features
@@ -451,7 +452,7 @@ export default function Home() {
   </section>
 
   {/* ================= FEEDBACK ================= */ }
-  <section className="py-28 px-6 bg-black text-white border-t border-[#1f1f1f] relative overflow-hidden">
+  <section id="feedback" className="py-28 px-6 bg-black text-white border-t border-[#1f1f1f] relative overflow-hidden">
 
     {/* subtle glow background */}
     <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#d4af7f]/10 blur-[120px] rounded-full" />
@@ -496,13 +497,15 @@ export default function Home() {
         </div>
 
         {/* Button */}
+        <form onSubmit={handleSubmit}>
         <button
-          onClick={handleSubmit}
+          type="submit"
           disabled={loading}
           className="w-full py-4 rounded-xl bg-[#d4af7f] text-black font-semibold tracking-wide hover:opacity-90 transition shadow-lg"
         >
           {loading ? "Submitting..." : "Submit Feedback"}
         </button>
+        </form>
 
       </div>
 

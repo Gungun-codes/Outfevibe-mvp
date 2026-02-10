@@ -73,7 +73,11 @@ export default function OutfitChat() {
         item.mood === mood
     );
 
-    if (filtered.length === 0) filtered = allOutfits;
+    if (filtered.length === 0){
+      filtered = allOutfits.filter(
+      (item)=> item.gender === gender
+    );
+  }
 
     setResults(pickTwoRandom(filtered));
     simulateTyping(6);
@@ -274,7 +278,7 @@ export default function OutfitChat() {
 
               <div className="flex gap-3 mt-4">
                 <button
-                  onClick={restyle}
+                  onClick={() => window.location.reload()}
                   className="border px-4 py-2 rounded-full text-sm"
                 >
                   Restyle
