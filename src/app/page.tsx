@@ -17,7 +17,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (!name || !message) {
       alert("Please fill in both fields.");
       return;
@@ -41,16 +41,16 @@ export default function Home() {
   };
 
   const femaleTrending = [
-    { id: 1, name: "Power Luxe", desc: "Minimal yet bold.", image: "/trending/power_luxe.jpg", affiliateLink:"https://myntr.it/KZQlcwk", },
-    { id: 2, name: "Regal Grace", desc: "Timeless elegance with commanding Aura.", image: "/trending/regal_grace.jpg", affiliateLink:"https://myntr.it/nqbG7HT", },
-    { id: 3, name: "Blush Breeze", desc: "Confident & structured.", image: "/trending/blush_breeze.jpg", affiliateLink:"https://myntr.it/3A7h4jM", },
-    { id: 4, name: "Velvet Poise", desc: "Sharp night aesthetic.", image: "/trending/velvet_poise.jpg", affiliateLink:"https://myntr.it/cduZpsB", } 
+    { id: 1, name: "Power Luxe", desc: "Minimal yet bold.", image: "/trending/power_luxe.jpg", affiliateLink: "https://myntr.it/KZQlcwk", },
+    { id: 2, name: "Regal Grace", desc: "Timeless elegance with commanding Aura.", image: "/trending/regal_grace.jpg", affiliateLink: "https://myntr.it/nqbG7HT", },
+    { id: 3, name: "Blush Breeze", desc: "Confident & structured.", image: "/trending/blush_breeze.jpg", affiliateLink: "https://myntr.it/3A7h4jM", },
+    { id: 4, name: "Velvet Poise", desc: "Sharp night aesthetic.", image: "/trending/velvet_poise.jpg", affiliateLink: "https://myntr.it/cduZpsB", }
   ];
   const maleTrending = [
-    { id: 1, name: "Gentlemen's Reserve", desc: "Classic tailoring with quiet Luxury.", image: "/trending/gentlemen_reserve.jpg", affiliateLink:"https://myntr.it/DXSr4Q5", },
-    { id: 2, name: "Urban Drift", desc: "Relaxed street style with everyday edge.", image: "/trending/urban_drift.jpg", affiliateLink:"https://myntr.it/91rJvpL", },
-    { id: 3, name: "Midnight Minimal", desc: "Sharp layers with understated edge.", image: "/trending/midnight_minimal.jpg", affiliateLink:"https://myntr.it/8xeku29", },
-    { id: 4, name: "Modern Gent", desc: "Relaxed premium.", image: "/trending/modern_gent.jpg", affiliateLink:"https://myntr.it/wfj2Ks0", }
+    { id: 1, name: "Gentlemen's Reserve", desc: "Classic tailoring with quiet Luxury.", image: "/trending/gentlemen_reserve.jpg", affiliateLink: "https://myntr.it/DXSr4Q5", },
+    { id: 2, name: "Urban Drift", desc: "Relaxed street style with everyday edge.", image: "/trending/urban_drift.jpg", affiliateLink: "https://myntr.it/91rJvpL", },
+    { id: 3, name: "Midnight Minimal", desc: "Sharp layers with understated edge.", image: "/trending/midnight_minimal.jpg", affiliateLink: "https://myntr.it/8xeku29", },
+    { id: 4, name: "Modern Gent", desc: "Relaxed premium.", image: "/trending/modern_gent.jpg", affiliateLink: "https://myntr.it/wfj2Ks0", }
   ];
 
   return (
@@ -130,7 +130,7 @@ export default function Home() {
 
               <button
                 onClick={() => {
-                  const el = document.getElementById("features");
+                  const el = document.getElementById("feature");
                   el?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="px-8 py-3 rounded-lg border border-white text-white hover:bg-white hover:text-black transition"
@@ -214,76 +214,60 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="mt-3 inline-block text-[#d4af7f] text-sm hover:underline"
                     >
-                    Explore Look
+                      Explore Look
                     </a>
+                  </div>
                 </div>
-                </div>
-          )
+              )
             )}
+          </div>
         </div>
-      </div>
-    </section>
-
-      {/* ================= ABOUT ================= */ }
-  <section id="about" className="py-28 px-6 bg-gradient-to-b from-black to-[#0a0a0a] border-t border-[#1f1f1f]">
-    <div className="max-w-5xl mx-auto text-center">
-
-      <h2 className="text-5xl font-bold mb-8">
-        About <span className="text-[#d4af7f]">Outfevibe</span>
-      </h2>
-
-      <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
-        Outfevibe is built for individuals who want confidence without confusion.
-        We style what you already own and transform your wardrobe into a system of
-        powerful expression. Fashion is not gender. It is identity. It is presence.
-      </p>
-
-    </div>
-  </section>
+      </section>
 
 
-  {/* ================= HOW IT WORKS ================= */ }
-  <section className="py-28 px-6 bg-black border-t border-[#1f1f1f]">
-    <div className="max-w-7xl mx-auto text-center">
 
-      <h2 className="text-5xl font-bold mb-20">
-        How It <span className="text-[#d4af7f]">Works</span>
-      </h2>
+      {/* ================= HOW IT WORKS ================= */}
+      <section className="py-28 px-6 bg-black border-t border-[#1f1f1f]">
+        <div className="max-w-7xl mx-auto text-center">
 
-      <div className="grid md:grid-cols-4 gap-10 relative">
+          <h2 className="text-5xl font-bold mb-20">
+            How It <span className="text-[#d4af7f]">Works</span>
+          </h2>
 
-        {/* CONNECTING LINE */}
-        <div className="hidden md:block absolute top-16 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#d4af7f] to-transparent opacity-20" />
+          <div className="grid md:grid-cols-4 gap-10 relative">
 
-        {[
-          {
-            number: "01",
-            title: "Upload",
-            desc: "Upload a clothing piece or start fresh."
-          },
-          {
-            number: "02",
-            title: "Select Context",
-            desc: "Choose mood, occasion & color."
-          },
-          {
-            number: "03",
-            title: "Style Engine",
-            desc: "Our AI matches pieces intelligently."
-          },
-          {
-            number: "04",
-            title: "Get Look",
-            desc: "Receive powerful outfit combinations."
-          }
-        ].map((step, index) => (
-          <div
-            key={index}
-            className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
-          >
+            {/* CONNECTING LINE */}
+            <div className="hidden md:block absolute top-16 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#d4af7f] to-transparent opacity-20" />
 
-            {/* Big Background Number */}
-            <span className="absolute
+            {[
+              {
+                number: "01",
+                title: "Upload",
+                desc: "Upload a clothing piece or start fresh."
+              },
+              {
+                number: "02",
+                title: "Select Context",
+                desc: "Choose mood, occasion & color."
+              },
+              {
+                number: "03",
+                title: "Style Engine",
+                desc: "Our AI matches pieces intelligently."
+              },
+              {
+                number: "04",
+                title: "Get Look",
+                desc: "Receive powerful outfit combinations."
+              }
+            ].map((step, index) => (
+              <div
+                key={index}
+                className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
+              >
+
+                {/* Big Background Number */}
+                <span className="absolute
                  -top-4 
                  -left-2 
                  text-[72px] 
@@ -300,296 +284,312 @@ export default function Home() {
                 pointer-events-none
                 select-none
                 ">
-              {step.number}
-            </span>
+                  {step.number}
+                </span>
 
-            <h3 className="text-xl font-semibold mb-3 mt-8">
-              {step.title}
+                <h3 className="text-xl font-semibold mb-3 mt-8">
+                  {step.title}
+                </h3>
+
+                <p className="text-gray-400 text-sm">
+                  {step.desc}
+                </p>
+
+              </div>
+            ))}
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FEATURES ================= */}
+      <section id="feature" className="py-20 px-6 border-t border-[#1f1f1f]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Features
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+
+            {/* AI Outfit Suggestions */}
+            <div
+              onClick={() => router.push("/outfit")}
+              className="cursor-pointer border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl hover:border-[#d4af7f] hover:shadow-[0_0_40px_rgba(212,175,127,0.2)] transition group"
+            >
+              {/* ICON */}
+              <div className="mb-6">
+                <img
+                  src="/features/ai-suggest.png"
+                  alt="AI Outfit Suggestion"
+                  className="w-16 h-16 object-contain group-hover:scale-110 transition duration-300"
+                />
+              </div>
+
+              <h3 className="text-xl font-semibold mb-4 group-hover:text-[#d4af7f] transition">
+                AI Outfit Suggestions
+              </h3>
+
+              <p className="text-gray-400 text-sm">
+                Get personalized outfit recommendations based on your personality,
+                occasion, and style preferences.
+              </p>
+            </div>
+
+            {/* Virtual Wardrobe */}
+            <div
+              className="border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl opacity-80 cursor-not-allowed hover:shadow-[0_0_40px_rgba(255,0,150,0.15)] transition"
+            >
+              {/* ICON */}
+              <div className="mb-6">
+                <img
+                  src="/features/wardrobe.png"
+                  alt="Virtual Wardrobe"
+                  className="w-16 h-16 object-contain"
+                />
+              </div>
+
+              <h3 className="text-xl font-semibold mb-4">
+                Virtual Wardrobe
+              </h3>
+
+              <p className="text-gray-400 text-sm mb-4">
+                Organize and manage your wardrobe digitally. Mix, match, and plan
+                your outfits effortlessly.
+              </p>
+
+              <span className="inline-block text-xs px-3 py-1 border border-gray-600 rounded-full text-gray-400">
+                Coming Soon
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* ================= ABOUT ================= */}
+      <section id="about" className="py-28 px-6 bg-gradient-to-b from-black to-[#0a0a0a] border-t border-[#1f1f1f]">
+        <div className="max-w-5xl mx-auto text-center">
+
+          <h2 className="text-5xl font-bold mb-8">
+            About <span className="text-[#d4af7f]">Outfevibe</span>
+          </h2>
+
+          <p className="text-gray-400 text-lg leading-relaxed max-w-3xl mx-auto">
+            Outfevibe is built for individuals who want confidence without confusion.
+            We style what you already own and transform your wardrobe into a system of
+            powerful expression. Fashion is not gender. It is identity. It is presence.
+          </p>
+
+        </div>
+      </section>
+      {/* ================= TESTIMONIALS ================= */}
+      <section className="py-28 px-6 border-t border-[#1f1f1f] bg-black text-white">
+        <div className="max-w-6xl mx-auto text-center">
+
+          <h2 className="text-4xl md:text-5xl font-bold mb-16">
+            What Users Say
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+
+            {/* Testimonial 1 */}
+            <div className="relative border border-[#1f1f1f] bg-[#111] p-8 rounded-2xl hover:border-[#d4af7f] transition duration-300 group">
+
+              <div className="text-[#d4af7f] text-3xl mb-4">❝</div>
+
+              <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                Finally a styling system that understands identity.
+                Not just clothes.
+              </p>
+
+              <span className="text-xs text-[#d4af7f] tracking-wide">
+                — Early User
+              </span>
+
+              {/* subtle glow */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#d4af7f]/10 via-transparent to-transparent"></div>
+            </div>
+
+
+            {/* Testimonial 2 */}
+            <div className="relative border border-[#1f1f1f] bg-[#111] p-8 rounded-2xl hover:border-[#d4af7f] transition duration-300 group">
+
+              <div className="text-[#d4af7f] text-3xl mb-4">❝</div>
+
+              <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                It feels like the app actually understands my vibe.
+                The personality result was scary accurate.
+              </p>
+
+              <span className="text-xs text-[#d4af7f] tracking-wide">
+                — Beta Tester
+              </span>
+
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#d4af7f]/10 via-transparent to-transparent"></div>
+            </div>
+
+
+            {/* Testimonial 3 */}
+            <div className="relative border border-[#1f1f1f] bg-[#111] p-8 rounded-2xl hover:border-[#d4af7f] transition duration-300 group">
+
+              <div className="text-[#d4af7f] text-3xl mb-4">❝</div>
+
+              <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                I shared my personality result with friends —
+                now they’re all using Outfevibe too.
+              </p>
+
+              <span className="text-xs text-[#d4af7f] tracking-wide">
+                — College User
+              </span>
+
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#d4af7f]/10 via-transparent to-transparent"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FEEDBACK ================= */}
+      <section id="feedback" className="py-28 px-6 bg-black text-white border-t border-[#1f1f1f] relative overflow-hidden">
+
+        {/* subtle glow background */}
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#d4af7f]/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#d4af7f]/5 blur-[100px] rounded-full" />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+
+          {/* Heading */}
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
+            Your Voice <span className="text-[#d4af7f]">Matters</span>
+          </h2>
+
+          <p className="text-center text-gray-400 mb-16 max-w-xl mx-auto">
+            Help us shape the future of Outfevibe. Your feedback fuels the revolution.
+          </p>
+
+          {/* Card */}
+          <div className="bg-[#111] border border-[#1f1f1f] rounded-3xl p-10 shadow-[0_0_60px_rgba(212,175,127,0.05)]">
+
+            {/* Name */}
+            <div className="mb-8">
+              <label className="block text-sm mb-2 text-gray-400">Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                className="w-full px-5 py-4 rounded-xl bg-black border border-[#2a2a2a] focus:border-[#d4af7f] outline-none transition"
+              />
+            </div>
+
+            {/* Message */}
+            <div className="mb-10">
+              <label className="block text-sm mb-2 text-gray-400">Message</label>
+              <textarea
+                rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Tell us what you think..."
+                className="w-full px-5 py-4 rounded-xl bg-black border border-[#2a2a2a] focus:border-[#d4af7f] outline-none transition resize-none"
+              />
+            </div>
+
+            {/* Button */}
+            <form onSubmit={handleSubmit}>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-4 rounded-xl bg-[#d4af7f] text-black font-semibold tracking-wide hover:opacity-90 transition shadow-lg"
+              >
+                {loading ? "Submitting..." : "Submit Feedback"}
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+      <footer className="border-t border-[#1f1f1f] bg-black text-white px-6 py-16">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+
+          {/* BRAND */}
+          <div>
+            <h3 className="text-2xl font-bold tracking-wide">
+              OUTFEVIBE
             </h3>
-
-            <p className="text-gray-400 text-sm">
-              {step.desc}
+            <p className="text-gray-400 mt-4 text-sm leading-relaxed">
+              AI-powered styling that understands identity.
+              Not just clothes.
             </p>
 
-          </div>
-        ))}
+            <div className="flex gap-4 mt-6">
+              <a href="https://www.instagram.com/what.gungun?igsh=NDBma3Fzdnp3bG5q" target="_blank" className="circle">
+                IG
+              </a>
 
-      </div>
-    </div>
-  </section>
+              <a href="https://www.linkedin.com/in/gungun-jain-1508" target="_blank" className="circle">LN</a>
 
-  {/* ================= FEATURES ================= */ }
-  <section id="feature" className="py-20 px-6 border-t border-[#1f1f1f]">
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-4xl font-bold text-center mb-16">
-        Features
-      </h2>
+              <a href="https://youtube.com/@heygungun?si=QH1rCAhN-7EeNMvP" target="_blank" className="circle">YT</a>
 
-      <div className="grid md:grid-cols-2 gap-8">
-
-        {/* AI Outfit Suggestions */}
-        <div
-          onClick={() => router.push("/outfit")}
-          className="cursor-pointer border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl hover:border-[#d4af7f] hover:shadow-[0_0_40px_rgba(212,175,127,0.2)] transition group"
-        >
-          {/* ICON */}
-          <div className="mb-6">
-            <img
-              src="/features/ai-suggest.png"
-              alt="AI Outfit Suggestion"
-              className="w-16 h-16 object-contain group-hover:scale-110 transition duration-300"
-            />
+            </div>
           </div>
 
-          <h3 className="text-xl font-semibold mb-4 group-hover:text-[#d4af7f] transition">
-            AI Outfit Suggestions
-          </h3>
-
-          <p className="text-gray-400 text-sm">
-            Get personalized outfit recommendations based on your personality,
-            occasion, and style preferences.
-          </p>
-        </div>
-
-        {/* Virtual Wardrobe */}
-        <div
-          className="border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl opacity-80 cursor-not-allowed hover:shadow-[0_0_40px_rgba(255,0,150,0.15)] transition"
-        >
-          {/* ICON */}
-          <div className="mb-6">
-            <img
-              src="/features/wardrobe.png"
-              alt="Virtual Wardrobe"
-              className="w-16 h-16 object-contain"
-            />
+          {/* PRODUCT */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Product</h4>
+            <ul className="space-y-3 text-gray-400 text-sm">
+              <li> <Link href="/outfit" className="hover:text-white transition">AI Outfit Suggestions</Link></li>
+              <li className="hover:text-white transition" >Virtual Wardrobe </li>
+              <li> <Link href="/quiz" className="hover:text-white transition">Style Quiz</Link></li>
+            </ul>
           </div>
 
-          <h3 className="text-xl font-semibold mb-4">
-            Virtual Wardrobe
-          </h3>
+          {/* COMPANY */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Company</h4>
+            <ul className="space-y-3 text-gray-400 text-sm">
+              <li><Link href="/about" className="hover:text-white transition">About</Link></li>
+              <li><Link href="/careers" className="hover:text-white transition">Careers</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition">Contact</Link></li>
+            </ul>
+          </div>
 
-          <p className="text-gray-400 text-sm mb-4">
-            Organize and manage your wardrobe digitally. Mix, match, and plan
-            your outfits effortlessly.
-          </p>
+          {/* NEWSLETTER */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Stay Updated</h4>
+            <p className="text-gray-400 text-sm mb-4">
+              Get early access to new features and drops.
+            </p>
 
-          <span className="inline-block text-xs px-3 py-1 border border-gray-600 rounded-full text-gray-400">
-            Coming Soon
-          </span>
+            <div className="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-black border border-[#2a2a2a] rounded-l-xl text-sm focus:outline-none focus:border-[#d4af7f]"
+              />
+              <button
+                onClick={() => {
+                  if (!email) return alert("Enter Email First!");
+                  alert("You Are On The List!");
+                }}
+                className="px-6 bg-[#d4af7f] text-black font-semibold rounded-r-xl hover:opacity-90 transition">
+                Join
+              </button>
+            </div>
+          </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-
-  {/* ================= TESTIMONIALS ================= */ }
-  <section className="py-28 px-6 border-t border-[#1f1f1f] bg-black text-white">
-    <div className="max-w-6xl mx-auto text-center">
-
-      <h2 className="text-4xl md:text-5xl font-bold mb-16">
-        What Users Say
-      </h2>
-
-      <div className="grid md:grid-cols-3 gap-8">
-
-        {/* Testimonial 1 */}
-        <div className="relative border border-[#1f1f1f] bg-[#111] p-8 rounded-2xl hover:border-[#d4af7f] transition duration-300 group">
-
-          <div className="text-[#d4af7f] text-3xl mb-4">❝</div>
-
-          <p className="text-gray-300 text-sm leading-relaxed mb-6">
-            Finally a styling system that understands identity.
-            Not just clothes.
-          </p>
-
-          <span className="text-xs text-[#d4af7f] tracking-wide">
-            — Early User
-          </span>
-
-          {/* subtle glow */}
-          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#d4af7f]/10 via-transparent to-transparent"></div>
+        {/* BOTTOM BAR */}
+        <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-center text-gray-500 text-sm">
+          © {new Date().getFullYear()} Outfevibe. Built with intention.
         </div>
-
-
-        {/* Testimonial 2 */}
-        <div className="relative border border-[#1f1f1f] bg-[#111] p-8 rounded-2xl hover:border-[#d4af7f] transition duration-300 group">
-
-          <div className="text-[#d4af7f] text-3xl mb-4">❝</div>
-
-          <p className="text-gray-300 text-sm leading-relaxed mb-6">
-            It feels like the app actually understands my vibe.
-            The personality result was scary accurate.
-          </p>
-
-          <span className="text-xs text-[#d4af7f] tracking-wide">
-            — Beta Tester
-          </span>
-
-          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#d4af7f]/10 via-transparent to-transparent"></div>
-        </div>
-
-
-        {/* Testimonial 3 */}
-        <div className="relative border border-[#1f1f1f] bg-[#111] p-8 rounded-2xl hover:border-[#d4af7f] transition duration-300 group">
-
-          <div className="text-[#d4af7f] text-3xl mb-4">❝</div>
-
-          <p className="text-gray-300 text-sm leading-relaxed mb-6">
-            I shared my personality result with friends —
-            now they’re all using Outfevibe too.
-          </p>
-
-          <span className="text-xs text-[#d4af7f] tracking-wide">
-            — College User
-          </span>
-
-          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#d4af7f]/10 via-transparent to-transparent"></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  {/* ================= FEEDBACK ================= */ }
-  <section id="feedback" className="py-28 px-6 bg-black text-white border-t border-[#1f1f1f] relative overflow-hidden">
-
-    {/* subtle glow background */}
-    <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#d4af7f]/10 blur-[120px] rounded-full" />
-    <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#d4af7f]/5 blur-[100px] rounded-full" />
-
-    <div className="max-w-4xl mx-auto relative z-10">
-
-      {/* Heading */}
-      <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-        Your Voice <span className="text-[#d4af7f]">Matters</span>
-      </h2>
-
-      <p className="text-center text-gray-400 mb-16 max-w-xl mx-auto">
-        Help us shape the future of Outfevibe. Your feedback fuels the revolution.
-      </p>
-
-      {/* Card */}
-      <div className="bg-[#111] border border-[#1f1f1f] rounded-3xl p-10 shadow-[0_0_60px_rgba(212,175,127,0.05)]">
-
-        {/* Name */}
-        <div className="mb-8">
-          <label className="block text-sm mb-2 text-gray-400">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your name"
-            className="w-full px-5 py-4 rounded-xl bg-black border border-[#2a2a2a] focus:border-[#d4af7f] outline-none transition"
-          />
-        </div>
-
-        {/* Message */}
-        <div className="mb-10">
-          <label className="block text-sm mb-2 text-gray-400">Message</label>
-          <textarea
-            rows={5}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Tell us what you think..."
-            className="w-full px-5 py-4 rounded-xl bg-black border border-[#2a2a2a] focus:border-[#d4af7f] outline-none transition resize-none"
-          />
-        </div>
-
-        {/* Button */}
-        <form onSubmit={handleSubmit}>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-4 rounded-xl bg-[#d4af7f] text-black font-semibold tracking-wide hover:opacity-90 transition shadow-lg"
-        >
-          {loading ? "Submitting..." : "Submit Feedback"}
-        </button>
-        </form>
-
-      </div>
-
-    </div>
-  </section>
-
-  {/* ================= FOOTER ================= */ }
-  <footer className="border-t border-[#1f1f1f] bg-black text-white px-6 py-16">
-    <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-
-      {/* BRAND */}
-      <div>
-        <h3 className="text-2xl font-bold tracking-wide">
-          OUTFEVIBE
-        </h3>
-        <p className="text-gray-400 mt-4 text-sm leading-relaxed">
-          AI-powered styling that understands identity.
-          Not just clothes.
-        </p>
-
-        <div className="flex gap-4 mt-6">
-          <a href="https://www.instagram.com/what.gungun?igsh=NDBma3Fzdnp3bG5q" target="_blank" className="circle">
-            IG
-          </a>
-
-          <a href="https://www.linkedin.com/in/gungun-jain-1508" target="_blank" className="circle">LN</a>
-
-          <a href="https://youtube.com/@heygungun?si=QH1rCAhN-7EeNMvP" target="_blank" className="circle">YT</a>
-
-        </div>
-      </div>
-
-      {/* PRODUCT */}
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Product</h4>
-        <ul className="space-y-3 text-gray-400 text-sm">
-          <li> <Link href="/outfit" className="hover:text-white transition">AI Outfit Suggestions</Link></li>
-          <li className="hover:text-white transition" >Virtual Wardrobe </li>
-          <li> <Link href="/quiz" className="hover:text-white transition">Style Quiz</Link></li>
-        </ul>
-      </div>
-
-      {/* COMPANY */}
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Company</h4>
-        <ul className="space-y-3 text-gray-400 text-sm">
-          <li><Link href="/about" className="hover:text-white transition">About</Link></li>
-          <li><Link href="/careers" className="hover:text-white transition">Careers</Link></li>
-          <li><Link href="/contact" className="hover:text-white transition">Contact</Link></li>
-        </ul>
-      </div>
-
-      {/* NEWSLETTER */}
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Stay Updated</h4>
-        <p className="text-gray-400 text-sm mb-4">
-          Get early access to new features and drops.
-        </p>
-
-        <div className="flex">
-          <input
-            type="email"
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 bg-black border border-[#2a2a2a] rounded-l-xl text-sm focus:outline-none focus:border-[#d4af7f]"
-          />
-          <button
-            onClick={() => {
-              if (!email) return alert("Enter Email First!");
-              alert("You Are On The List!");
-            }}
-            className="px-6 bg-[#d4af7f] text-black font-semibold rounded-r-xl hover:opacity-90 transition">
-            Join
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* BOTTOM BAR */}
-    <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-center text-gray-500 text-sm">
-      © {new Date().getFullYear()} Outfevibe. Built with intention.
-    </div>
-  </footer>
+      </footer>
 
     </main >
   );
