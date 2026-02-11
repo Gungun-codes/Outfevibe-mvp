@@ -6,8 +6,10 @@ import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Link from "next/link";
+import { useAuth } from "@/context/authContext";
 
 export default function Home() {
+  const { user, logout } = useAuth();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,45 +60,60 @@ export default function Home() {
 
       {/* ================= NAVBAR ================= */}
 
-      <header className="w-full border-b border-neutral-800 bg-black">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-md transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
           {/* Left - Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => router.push('/')}>
             <Image
               src="/outfevibe_logo.png"
               alt="Outfevibe Logo"
-              width={38}
-              height={38}
+              width={40}
+              height={40}
               className="object-contain"
             />
-            <span className="text-xl font-semibold tracking-wide text-white">
+            <span className="text-xl font-bold tracking-widest text-white">
               OUTFEVIBE
             </span>
           </div>
 
           {/* CENTER - NAV LINKS */}
-          <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
-            <a href="#about" className="hover:text-neutral-400 transition">
+          <nav className="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide text-gray-300">
+            <a href="#about" className="hover:text-[#d4af7f] transition-colors duration-300">
               About
             </a>
-            <a href="#trend" className="hover:text-neutral-400 transition">
+            <a href="#trend" className="hover:text-[#d4af7f] transition-colors duration-300">
               Trend
             </a>
-            <a href="#feature" className="hover:text-neutral-400 transition">
+            <a href="#feature" className="hover:text-[#d4af7f] transition-colors duration-300">
               Feature
             </a>
-            <a href="#feedback" className="hover:text-neutral-400 transition">
+            <a href="#feedback" className="hover:text-[#d4af7f] transition-colors duration-300">
               Feedback
             </a>
           </nav>
           {/* RIGHT - LOGIN BUTTON */}
           <div>
-            <button
-              onClick={() => router.push("/login")}
-              className="border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition">
-              Login
-            </button>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <span className="text-white font-medium border-r border-gray-700 pr-4">
+                  {user.displayName ? user.displayName.split(' ')[0] : 'User'}
+                </span>
+                <button
+                  onClick={logout}
+                  className="text-sm text-gray-400 hover:text-white transition"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => router.push("/login")}
+                className="bg-white text-black px-6 py-2.5 rounded-full font-semibold hover:bg-[#d4af7f] transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(212,175,127,0.4)]"
+              >
+                Login
+              </button>
+            )}
           </div>
 
         </div>
@@ -262,8 +279,8 @@ export default function Home() {
               }
             ].map((step, index) => (
               <div
-                key={index}
-                className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
+              key={index}
+              className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
               >
 
                 {/* Big Background Number */}
@@ -278,12 +295,12 @@ export default function Home() {
                  bg-clip-text
                  text-transparent
                  opacity-20
-                  transition-all 
-                duration-300 
-                group-hover:opacity-40
-                pointer-events-none
-                select-none
-                ">
+                 transition-all 
+                 duration-300 
+                 group-hover:opacity-40
+                 pointer-events-none
+                 select-none
+                 ">
                   {step.number}
                 </span>
 
@@ -315,14 +332,14 @@ export default function Home() {
             <div
               onClick={() => router.push("/outfit")}
               className="cursor-pointer border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl hover:border-[#d4af7f] hover:shadow-[0_0_40px_rgba(212,175,127,0.2)] transition group"
-            >
+              >
               {/* ICON */}
               <div className="mb-6">
                 <img
                   src="/features/ai-suggest.png"
                   alt="AI Outfit Suggestion"
                   className="w-16 h-16 object-contain group-hover:scale-110 transition duration-300"
-                />
+                  />
               </div>
 
               <h3 className="text-xl font-semibold mb-4 group-hover:text-[#d4af7f] transition">
@@ -338,14 +355,14 @@ export default function Home() {
             {/* Virtual Wardrobe */}
             <div
               className="border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl opacity-80 cursor-not-allowed hover:shadow-[0_0_40px_rgba(255,0,150,0.15)] transition"
-            >
+              >
               {/* ICON */}
               <div className="mb-6">
                 <img
                   src="/features/wardrobe.png"
                   alt="Virtual Wardrobe"
                   className="w-16 h-16 object-contain"
-                />
+                  />
               </div>
 
               <h3 className="text-xl font-semibold mb-4">
@@ -382,7 +399,7 @@ export default function Home() {
           </p>
 
         </div>
-      </section>
+      </section>             
       {/* ================= TESTIMONIALS ================= */}
       <section className="py-28 px-6 border-t border-[#1f1f1f] bg-black text-white">
         <div className="max-w-6xl mx-auto text-center">
