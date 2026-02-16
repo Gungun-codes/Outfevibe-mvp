@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import outfits from "../../../backend/outfits.json";
+import outfits from "../../../data/outfits.json";
 
 type Outfit = {
   id: number;
@@ -73,11 +73,11 @@ export default function OutfitChat() {
         item.mood === mood
     );
 
-    if (filtered.length === 0){
+    if (filtered.length === 0) {
       filtered = allOutfits.filter(
-      (item)=> item.gender === gender
-    );
-  }
+        (item) => item.gender === gender
+      );
+    }
 
     setResults(pickTwoRandom(filtered));
     simulateTyping(6);
@@ -87,7 +87,7 @@ export default function OutfitChat() {
     const genderFiltered = (outfits as Outfit[]).filter((item) => item.gender === gender);
     setResults(pickTwoRandom(genderFiltered));
   }
-  function restyle(){
+  function restyle() {
     setGender("");
     setMood("");
     setOccasion("");

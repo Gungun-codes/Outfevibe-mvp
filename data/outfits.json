@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "gender": "Girl",
+        "occasion": "Casual",
+        "mood": "Chill but Hot",
+        "color": "Blue",
+        "title": "Casual Blue Checkered Shirt",
+        "image": "/images/outfit1.jpg",
+        "affiliateLink": "https://example.com"
+    },
+    {
+        "id": 2,
+        "gender": "Boy",
+        "occasion": "Party",
+        "mood": "Main Character",
+        "color": "Black",
+        "title": "All Black Party Look",
+        "image": "/images/outfit2.jpg",
+        "affiliateLink": "https://example.com"
+    }
+]

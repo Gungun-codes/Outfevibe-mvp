@@ -1,0 +1,364 @@
+
+> outfevibe_mvp@0.1.0 build
+> next build
+
+▲ Next.js 16.1.4 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 19 errors:
+./src/app/layout.tsx:1:1
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m type { [33mMetadata[39m } [36mfrom[39m [32m"next"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { [33mGeist[39m[33m,[39m [33mGeist_Mono[39m } [36mfrom[39m [32m"next/font/google"[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [32m"./globals.css"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/layout.tsx:40:1
+Parsing ecmascript source code failed
+[0m [90m 38 |[39m   )[33m;[39m
+ [90m 39 |[39m }
+[31m[1m>[22m[39m[90m 40 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 41 |[39m [36mimport[39m type { [33mMetadata[39m } [36mfrom[39m [32m"next"[39m[33m;[39m
+ [90m 42 |[39m [36mimport[39m { [33mGeist[39m[33m,[39m [33mGeist_Mono[39m } [36mfrom[39m [32m"next/font/google"[39m[33m;[39m
+ [90m 43 |[39m [36mimport[39m [32m"./globals.css"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/layout.tsx:79:1
+Parsing ecmascript source code failed
+[0m [90m 77 |[39m   )[33m;[39m
+ [90m 78 |[39m }
+[31m[1m>[22m[39m[90m 79 |[39m [33m>>>[39m[33m>>>[39m[33m>[39m [35m59[39md1d8c0bd3e986dc8ff60e9717dffd6140668be
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 80 |[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/profile/page.tsx:1:1
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [32m"use client"[39m[33m;[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mimport[39m { useAuth } [36mfrom[39m [32m"@/context/authContext"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/profile/page.tsx:229:1
+Parsing ecmascript source code failed
+[0m [90m 227 |[39m     )[33m;[39m
+ [90m 228 |[39m }
+[31m[1m>[22m[39m[90m 229 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 230 |[39m [32m"use client"[39m[33m;[39m
+ [90m 231 |[39m
+ [90m 232 |[39m [36mimport[39m { useAuth } [36mfrom[39m [32m"@/context/authContext"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/profile/page.tsx:457:1
+Parsing ecmascript source code failed
+[0m [90m 455 |[39m     )[33m;[39m
+ [90m 456 |[39m }
+[31m[1m>[22m[39m[90m 457 |[39m [33m>>>[39m[33m>>>[39m[33m>[39m [35m59[39md1d8c0bd3e986dc8ff60e9717dffd6140668be
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 458 |[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/signup/page.tsx:1:1
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [32m"use client"[39m[33m;[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/signup/page.tsx:212:1
+Parsing ecmascript source code failed
+[0m [90m 210 |[39m     )[33m;[39m
+ [90m 211 |[39m }
+[31m[1m>[22m[39m[90m 212 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 213 |[39m [32m"use client"[39m[33m;[39m
+ [90m 214 |[39m
+ [90m 215 |[39m [36mimport[39m { useState[33m,[39m useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/app/signup/page.tsx:423:1
+Parsing ecmascript source code failed
+[0m [90m 421 |[39m     )[33m;[39m
+ [90m 422 |[39m }
+[31m[1m>[22m[39m[90m 423 |[39m [33m>>>[39m[33m>>>[39m[33m>[39m [35m59[39md1d8c0bd3e986dc8ff60e9717dffd6140668be
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 424 |[39m[0m
+
+Merge conflict marker encountered.
+
+
+./src/components/UserDropdown.tsx:1:1
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [32m"use client"[39m[33m;[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mimport[39m { useState[33m,[39m useRef[33m,[39m useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/UserDropdown.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/UserDropdown.tsx [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/components/UserDropdown.tsx:125:1
+Parsing ecmascript source code failed
+[0m [90m 123 |[39m     )[33m;[39m
+ [90m 124 |[39m }
+[31m[1m>[22m[39m[90m 125 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 126 |[39m [32m"use client"[39m[33m;[39m
+ [90m 127 |[39m
+ [90m 128 |[39m [36mimport[39m { useState[33m,[39m useRef[33m,[39m useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/UserDropdown.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/UserDropdown.tsx [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/components/UserDropdown.tsx:249:1
+Parsing ecmascript source code failed
+[0m [90m 247 |[39m     )[33m;[39m
+ [90m 248 |[39m }
+[31m[1m>[22m[39m[90m 249 |[39m [33m>>>[39m[33m>>>[39m[33m>[39m [35m59[39md1d8c0bd3e986dc8ff60e9717dffd6140668be
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 250 |[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/components/UserDropdown.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/UserDropdown.tsx [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/context/authContext.tsx:1:1
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [32m"use client"[39m[33m;[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mimport[39m [33mReact[39m[33m,[39m { createContext[33m,[39m useState[33m,[39m useEffect[33m,[39m useContext } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/context/authContext.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/context/authContext.tsx [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/context/authContext.tsx:108:1
+Parsing ecmascript source code failed
+[0m [90m 106 |[39m     [36mreturn[39m context[33m;[39m
+ [90m 107 |[39m }[33m;[39m
+[31m[1m>[22m[39m[90m 108 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 109 |[39m [32m"use client"[39m[33m;[39m
+ [90m 110 |[39m
+ [90m 111 |[39m [36mimport[39m [33mReact[39m[33m,[39m { createContext[33m,[39m useState[33m,[39m useEffect[33m,[39m useContext } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/context/authContext.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/context/authContext.tsx [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/context/authContext.tsx:215:1
+Parsing ecmascript source code failed
+[0m [90m 213 |[39m     [36mreturn[39m context[33m;[39m
+ [90m 214 |[39m }[33m;[39m
+[31m[1m>[22m[39m[90m 215 |[39m [33m>>>[39m[33m>>>[39m[33m>[39m [35m59[39md1d8c0bd3e986dc8ff60e9717dffd6140668be
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 216 |[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/context/authContext.tsx [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/context/authContext.tsx [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/lib/supabase.ts:1:1
+Parsing ecmascript source code failed
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m<<[39m[33m<<[39m[33m<<[39m[33m<[39m [33mHEAD[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m { createClient } [36mfrom[39m [32m'@supabase/supabase-js'[39m[33m;[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mconst[39m supabaseUrl [33m=[39m process[33m.[39menv[33m.[39m[33mNEXT_PUBLIC_SUPABASE_URL[39m[33m![39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/lib/supabase.ts:8:1
+Parsing ecmascript source code failed
+[0m [90m  6 |[39m
+ [90m  7 |[39m [36mexport[39m [36mconst[39m supabase [33m=[39m createClient(supabaseUrl[33m,[39m supabaseAnonKey)[33m;[39m
+[31m[1m>[22m[39m[90m  8 |[39m [33m===[39m[33m===[39m[33m=[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { createClient } [36mfrom[39m [32m'@supabase/supabase-js'[39m[33m;[39m
+ [90m 10 |[39m
+ [90m 11 |[39m [36mconst[39m supabaseUrl [33m=[39m process[33m.[39menv[33m.[39m[33mNEXT_PUBLIC_SUPABASE_URL[39m[33m![39m[33m;[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/lib/supabase.ts:15:1
+Parsing ecmascript source code failed
+[0m [90m 13 |[39m
+ [90m 14 |[39m [36mexport[39m [36mconst[39m supabase [33m=[39m createClient(supabaseUrl[33m,[39m supabaseAnonKey)[33m;[39m
+[31m[1m>[22m[39m[90m 15 |[39m [33m>>>[39m[33m>>>[39m[33m>[39m [35m59[39md1d8c0bd3e986dc8ff60e9717dffd6140668be
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 16 |[39m[0m
+
+Merge conflict marker encountered.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+
+./src/app/outfit/page.tsx:4:1
+Module not found: Can't resolve '../../../backend/outfits.json'
+[0m [90m 2 |[39m
+ [90m 3 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m useRef } [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m outfits [36mfrom[39m [32m"../../../backend/outfits.json"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m type [33mOutfit[39m [33m=[39m {
+ [90m 7 |[39m   id[33m:[39m number[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/outfit/page.tsx [Client Component Browser]
+    ./src/app/outfit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/outfit/page.tsx [Client Component SSR]
+    ./src/app/outfit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./src/app/layout.tsx:1:1)
+    at <unknown> (./src/app/layout.tsx:40:1)
+    at <unknown> (./src/app/layout.tsx:79:1)
+    at <unknown> (./src/app/profile/page.tsx:1:1)
+    at <unknown> (./src/app/profile/page.tsx:229:1)
+    at <unknown> (./src/app/profile/page.tsx:457:1)
+    at <unknown> (./src/app/signup/page.tsx:1:1)
+    at <unknown> (./src/app/signup/page.tsx:212:1)
+    at <unknown> (./src/app/signup/page.tsx:423:1)
+    at <unknown> (./src/components/UserDropdown.tsx:1:1)
+    at <unknown> (./src/components/UserDropdown.tsx:125:1)
+    at <unknown> (./src/components/UserDropdown.tsx:249:1)
+    at <unknown> (./src/context/authContext.tsx:1:1)
+    at <unknown> (./src/context/authContext.tsx:108:1)
+    at <unknown> (./src/context/authContext.tsx:215:1)
+    at <unknown> (./src/lib/supabase.ts:1:1)
+    at <unknown> (./src/lib/supabase.ts:8:1)
+    at <unknown> (./src/lib/supabase.ts:15:1)
+    at <unknown> (./src/app/outfit/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

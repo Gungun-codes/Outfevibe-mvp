@@ -1,0 +1,3 @@
+[00:00:01.225] Server  LOG     ✓ Ready in 863ms
+[00:00:27.115] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:29.752] Browser WARN    Image with src "/hero/hero.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
