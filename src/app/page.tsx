@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image"
 import { useState } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { useAuth } from "@/context/authContext";
+import UserDropdown from "@/components/UserDropdown";
 
 export default function Home() {
   const { user, logout } = useAuth();
@@ -26,11 +26,16 @@ export default function Home() {
     }
     try {
       setLoading(true);
-      await addDoc(collection(db, "feedback"), {
-        name: name,
-        message: message,
-        createdAt: serverTimestamp(),
-      });
+      const { error } = await supabase
+        .from("feedback")
+        .insert({
+          name: name,
+          message: message,
+          created_at: new Date().toISOString(),
+        });
+
+      if (error) throw error;
+
       alert("Feedback submitted successfully!");
       setName("");
       setMessage("");
@@ -41,6 +46,7 @@ export default function Home() {
       setLoading(false);
     }
   };
+
 
   const femaleTrending = [
     { id: 1, name: "Power Luxe", desc: "Minimal yet bold.", image: "/trending/power_luxe.jpg", affiliateLink: "https://myntr.it/KZQlcwk", },
@@ -95,17 +101,7 @@ export default function Home() {
           {/* RIGHT - LOGIN BUTTON */}
           <div>
             {user ? (
-              <div className="flex items-center gap-4">
-                <span className="text-white font-medium border-r border-gray-700 pr-4">
-                  {user.displayName ? user.displayName.split(' ')[0] : 'User'}
-                </span>
-                <button
-                  onClick={logout}
-                  className="text-sm text-gray-400 hover:text-white transition"
-                >
-                  Logout
-                </button>
-              </div>
+              <UserDropdown user={user} logout={logout} />
             ) : (
               <button
                 onClick={() => router.push("/login")}
@@ -279,8 +275,8 @@ export default function Home() {
               }
             ].map((step, index) => (
               <div
-              key={index}
-              className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
+                key={index}
+                className="relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden"
               >
 
                 {/* Big Background Number */}
@@ -332,14 +328,14 @@ export default function Home() {
             <div
               onClick={() => router.push("/outfit")}
               className="cursor-pointer border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl hover:border-[#d4af7f] hover:shadow-[0_0_40px_rgba(212,175,127,0.2)] transition group"
-              >
+            >
               {/* ICON */}
               <div className="mb-6">
                 <img
                   src="/features/ai-suggest.png"
                   alt="AI Outfit Suggestion"
                   className="w-16 h-16 object-contain group-hover:scale-110 transition duration-300"
-                  />
+                />
               </div>
 
               <h3 className="text-xl font-semibold mb-4 group-hover:text-[#d4af7f] transition">
@@ -355,14 +351,14 @@ export default function Home() {
             {/* Virtual Wardrobe */}
             <div
               className="border border-[#1f1f1f] bg-[#151515] p-8 rounded-2xl opacity-80 cursor-not-allowed hover:shadow-[0_0_40px_rgba(255,0,150,0.15)] transition"
-              >
+            >
               {/* ICON */}
               <div className="mb-6">
                 <img
                   src="/features/wardrobe.png"
                   alt="Virtual Wardrobe"
                   className="w-16 h-16 object-contain"
-                  />
+                />
               </div>
 
               <h3 className="text-xl font-semibold mb-4">
@@ -399,7 +395,7 @@ export default function Home() {
           </p>
 
         </div>
-      </section>             
+      </section>
       {/* ================= TESTIMONIALS ================= */}
       <section className="py-28 px-6 border-t border-[#1f1f1f] bg-black text-white">
         <div className="max-w-6xl mx-auto text-center">
