@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LogOut, User as UserIcon, ChevronDown } from "lucide-react";
-import { User } from "firebase/auth";
+import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface UserDropdownProps {
@@ -27,10 +28,7 @@ export default function UserDropdown({ user, logout }: UserDropdownProps) {
         };
     }, [dropdownRef]);
 
-    const toggleDropdown = () => setIsOpen(!isOpen);
-
-    // Get initials for fallback
-    const getInitials = (name: string | null) => {
+    const getInitials = (name: string | null | undefined) => {
         if (!name) return "U";
         return name
             .split(" ")
@@ -40,28 +38,29 @@ export default function UserDropdown({ user, logout }: UserDropdownProps) {
             .toUpperCase();
     };
 
+    // Get display name from user metadata
+    const displayName = user.user_metadata?.display_name || user.email?.split('@')[0] || "User";
+    const photoURL = user.user_metadata?.avatar_url || null;
+
     return (
-        <div className="relative z-50" ref={dropdownRef}>
-            {/* TRIGGER */}
+        <div className="relative" ref={dropdownRef}>
+            {/* TRIGGER BUTTON */}
             <button
-                onClick={toggleDropdown}
-                className="flex items-center gap-3 pl-1 pr-4 py-1 rounded-full border border-white/10 hover:border-[#d4af7f]/50 hover:bg-white/5 transition-all duration-300 group outline-none"
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center gap-3 px-4 py-2 rounded-full bg-[#1a1a1a] hover:bg-[#252525] transition border border-[#2a2a2a] hover:border-[#d4af7f]"
             >
-                <Avatar className="h-9 w-9 border-2 border-[#1f1f1f] group-hover:border-[#d4af7f] transition-colors">
-                    <AvatarImage src={user.photoURL || ""} alt={user.displayName || "User"} />
-                    <AvatarFallback className="bg-[#2a2a2a] text-[#d4af7f] font-bold">
-                        {getInitials(user.displayName)}
+                <Avatar className="h-8 w-8">
+                    <AvatarImage src={photoURL || ""} alt={displayName} />
+                    <AvatarFallback className="text-sm bg-[#0a0a0a] text-[#d4af7f]">
+                        {getInitials(displayName)}
                     </AvatarFallback>
                 </Avatar>
 
-                <div className="hidden md:block text-left">
-                    <p className="text-sm font-medium text-white group-hover:text-[#d4af7f] transition-colors leading-none">
-                        {user.displayName?.split(" ")[0] || "User"}
-                    </p>
-                </div>
+                <span className="text-sm font-medium hidden md:block">{displayName}</span>
 
                 <ChevronDown
-                    className={`w-4 h-4 text-gray-500 group-hover:text-[#d4af7f] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+                        }`}
                 />
             </button>
 
@@ -69,28 +68,24 @@ export default function UserDropdown({ user, logout }: UserDropdownProps) {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute right-0 mt-3 w-72 origin-top-right rounded-2xl bg-[#0a0a0a] border border-[#2a2a2a] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)] overflow-hidden"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#0a0a0a] border border-[#2a2a2a] shadow-2xl overflow-hidden z-50"
                     >
-                        {/* HEADER */}
-                        <div className="p-5 border-b border-[#1f1f1f] bg-gradient-to-b from-[#111] to-[#0a0a0a]">
-                            <div className="flex items-center gap-3 mb-3">
-                                <Avatar className="h-12 w-12 border border-[#2a2a2a]">
-                                    <AvatarImage src={user.photoURL || ""} />
-                                    <AvatarFallback className="bg-[#1a1a1a] text-[#d4af7f]">
-                                        {getInitials(user.displayName)}
+                        {/* USER INFO */}
+                        <div className="p-4 border-b border-[#1f1f1f] bg-gradient-to-b from-[#111] to-[#0a0a0a]">
+                            <div className="flex items-center gap-3 mb-2">
+                                <Avatar className="h-12 w-12 border-2 border-[#2a2a2a]">
+                                    <AvatarImage src={photoURL || ""} alt={displayName} />
+                                    <AvatarFallback className="text-lg bg-[#1a1a1a] text-[#d4af7f]">
+                                        {getInitials(displayName)}
                                     </AvatarFallback>
                                 </Avatar>
-                                <div className="overflow-hidden">
-                                    <p className="text-white font-bold truncate text-lg">
-                                        {user.displayName || "User"}
-                                    </p>
-                                    <p className="text-xs text-gray-500 truncate mt-0.5 font-mono">
-                                        {user.email}
-                                    </p>
+                                <div className="flex-1 min-w-0">
+                                    <p className="font-semibold text-white truncate">{displayName}</p>
+                                    <p className="text-xs text-gray-500 truncate">{user.email}</p>
                                 </div>
                             </div>
                         </div>
@@ -98,32 +93,28 @@ export default function UserDropdown({ user, logout }: UserDropdownProps) {
                         {/* SECTIONS */}
                         <div className="p-2 space-y-1 bg-[#0a0a0a]">
 
-                            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-all group">
+                            <Link
+                                href="/profile"
+                                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-all group"
+                            >
                                 <UserIcon className="w-4 h-4 text-gray-500 group-hover:text-[#d4af7f] transition-colors" />
                                 <span>My Profile</span>
-                            </button>
+                            </Link>
 
                             <div className="my-1 h-px bg-[#1f1f1f] mx-2" />
 
                             <button
-                                onClick={() => {
-                                    logout();
+                                onClick={async () => {
+                                    await logout();
                                     setIsOpen(false);
                                 }}
-                                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all group font-medium"
+                                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-red-400 hover:text-red-300 hover:bg-red-500/5 transition-all group"
                             >
-                                <LogOut className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                <LogOut className="w-4 h-4" />
                                 <span>Sign Out</span>
                             </button>
-                        </div>
 
-                        {/* FOOTER */}
-                        <div className="px-4 py-3 bg-[#050505] border-t border-[#1f1f1f] flex justify-center">
-                            <span className="text-[10px] text-gray-600 tracking-widest uppercase">
-                                Outfevibe ID
-                            </span>
                         </div>
-
                     </motion.div>
                 )}
             </AnimatePresence>

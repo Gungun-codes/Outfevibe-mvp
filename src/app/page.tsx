@@ -3,8 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image"
 import { useState } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { useAuth } from "@/context/authContext";
 import UserDropdown from "@/components/UserDropdown";
@@ -27,11 +26,16 @@ export default function Home() {
     }
     try {
       setLoading(true);
-      await addDoc(collection(db, "feedback"), {
-        name: name,
-        message: message,
-        createdAt: serverTimestamp(),
-      });
+      const { error } = await supabase
+        .from("feedback")
+        .insert({
+          name: name,
+          message: message,
+          created_at: new Date().toISOString(),
+        });
+
+      if (error) throw error;
+
       alert("Feedback submitted successfully!");
       setName("");
       setMessage("");
@@ -42,6 +46,7 @@ export default function Home() {
       setLoading(false);
     }
   };
+
 
   const femaleTrending = [
     { id: 1, name: "Power Luxe", desc: "Minimal yet bold.", image: "/trending/power_luxe.jpg", affiliateLink: "https://myntr.it/KZQlcwk", },
