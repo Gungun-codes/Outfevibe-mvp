@@ -898,7 +898,7 @@ function Home() {
                                         className: "relative group p-10 rounded-2xl border border-[#1f1f1f] bg-[#111] hover:border-[#d4af37] transition duration-300 overflow-hidden",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "absolute   -top-4    -left-2    text-[72px]    font-bold    bg-gradient-to-b   from-[#d4af37]   to-[#b8860b]   bg-clip-text   text-transparent   opacity-20   transition-all    duration-300    group-hover:opacity-40   pointer-events-none   select-none   ",
+                                                className: "absolute -top-4  -left-2  text-[72px]  font-bold  bg-gradient-to-b from-[#d4af37] to-[#b8860b] bg-clip-text text-transparent opacity-20 transition-all  duration-300  group-hover:opacity-40 pointer-events-none select-none ",
                                                 children: step.number
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/page.tsx",

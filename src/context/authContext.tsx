@@ -32,10 +32,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // Listen for auth changes
         const {
             data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
+        } = supabase.auth.onAuthStateChange(async (event, session) => {
             setSession(session);
             setUser(session?.user ?? null);
             setLoading(false);
+
+            // Save/update user profile on sign in (catches Google OAuth + email logins)
+            if (event === "SIGNED_IN" && session?.user) {
+                const u = session.user;
+                const fullName =
+                    u.user_metadata?.full_name ||
+                    u.user_metadata?.display_name ||
+                    u.user_metadata?.name ||
+                    u.email?.split("@")[0] ||
+                    "";
+
+                const { error } = await supabase
+                    .from("users_profile")
+                    .upsert(
+                        {
+                            id: u.id,
+                            full_name: fullName,
+                        },
+                        { onConflict: "id" }
+                    );
+                if (error) console.error("Error saving user profile:", error);
+            }
         });
 
         return () => subscription.unsubscribe();
@@ -61,17 +83,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         });
         if (error) throw error;
 
-        // Optionally store user data in users table
+        // Store user data in users_profile table
         if (data.user) {
             const { error: dbError } = await supabase
-                .from("users")
-                .upsert({
-                    uid: data.user.id,
-                    email: data.user.email,
-                    display_name: displayName,
-                    created_at: new Date().toISOString(),
-                });
-            if (dbError) console.error("Error saving user to database:", dbError);
+                .from("users_profile")
+                .upsert(
+                    {
+                        id: data.user.id,
+                        full_name: displayName,
+                    },
+                    { onConflict: "id" }
+                );
+            if (dbError) console.error("Error saving user profile:", dbError);
         }
     };
 

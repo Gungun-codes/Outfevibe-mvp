@@ -2,19 +2,41 @@
 
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, Sparkles, TrendingUp, Zap, Calendar, Award, Heart, ShoppingBag } from "lucide-react";
 
 export default function ProfilePage() {
     const { user, loading, logout } = useAuth();
     const router = useRouter();
+    const [persona, setPersona] = useState<string | null>(null);
+    const [quizGender, setQuizGender] = useState<string | null>(null);
 
     useEffect(() => {
         if (!loading && !user) {
             router.push("/login");
         }
     }, [user, loading, router]);
+
+    // Load persona from Supabase
+    useEffect(() => {
+        if (!user) return;
+        const loadPersona = async () => {
+            const { data, error } = await supabase
+                .from("quiz_result")
+                .select("persona_name, gender")
+                .eq("user_id", user.id)
+                .order("created_at", { ascending: false })
+                .limit(1)
+                .single();
+            if (!error && data) {
+                setPersona(data.persona_name);
+                setQuizGender(data.gender);
+            }
+        };
+        loadPersona();
+    }, [user]);
 
     if (!user) {
         return null;
@@ -152,44 +174,71 @@ export default function ProfilePage() {
                     {/* Sidebar - Right Column */}
                     <div className="space-y-8">
 
-                        {/* Style Stats */}
+                        {/* Style Persona Card */}
+
+                        {/* Style Persona Card */}
                         <div className="bg-[#111] rounded-2xl p-6 border border-[#2a2a2a]">
                             <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <Heart className="w-5 h-5 text-[#d4af7f]" />
-                                Your Style DNA
+                                <Sparkles className="w-5 h-5 text-[#d4af7f]" />
+                                Your Style Persona
                             </h3>
-                            <div className="space-y-4">
-                                <div>
-                                    <div className="flex justify-between mb-1">
-                                        <span className="text-sm text-gray-400">Casual</span>
-                                        <span className="text-sm text-[#d4af7f]">0%</span>
-                                    </div>
-                                    <div className="h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
-                                        <div className="h-full bg-gradient-to-r from-[#d4af7f] to-[#b8860b] w-0"></div>
-                                    </div>
+                            {persona ? (
+                                <div className="text-center space-y-3">
+                                    <div className="text-4xl">✨</div>
+                                    <p className="text-xl font-bold text-[#d4af7f]">{persona}</p>
+                                    {quizGender && (
+                                        <p className="text-sm text-gray-400">{quizGender}</p>
+                                    )}
+                                    <button
+                                        onClick={() => router.push("/suggestions")}
+                                        className="mt-2 w-full py-2 rounded-lg border border-[#2a2a2a] hover:border-[#d4af7f] transition text-sm text-gray-300"
+                                    >
+                                        View My Fits
+                                    </button>
                                 </div>
-                                <div>
-                                    <div className="flex justify-between mb-1">
-                                        <span className="text-sm text-gray-400">Formal</span>
-                                        <span className="text-sm text-[#d4af7f]">0%</span>
-                                    </div>
-                                    <div className="h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
-                                        <div className="h-full bg-gradient-to-r from-[#d4af7f] to-[#b8860b] w-0"></div>
-                                    </div>
+                            ) : (
+                                <div className="text-center space-y-3">
+                                    <p className="text-sm text-gray-500">You haven't taken the quiz yet!</p>
+                                    <button
+                                        onClick={() => router.push("/quiz")}
+                                        className="w-full py-2 rounded-lg bg-[#d4af7f] text-black font-semibold hover:bg-[#e5cca5] transition text-sm"
+                                    >
+                                        Take Style Quiz
+                                    </button>
                                 </div>
-                                <div>
-                                    <div className="flex justify-between mb-1">
-                                        <span className="text-sm text-gray-400">Trendy</span>
-                                        <span className="text-sm text-[#d4af7f]">0%</span>
-                                    </div>
-                                    <div className="h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
-                                        <div className="h-full bg-gradient-to-r from-[#d4af7f] to-[#b8860b] w-0"></div>
-                                    </div>
+                            )}
+                        </div>
+                        <div className="space-y-4">
+                            <div>
+                                <div className="flex justify-between mb-1">
+                                    <span className="text-sm text-gray-400">Casual</span>
+                                    <span className="text-sm text-[#d4af7f]">0%</span>
                                 </div>
-                                <p className="text-xs text-gray-500 mt-4 text-center">
-                                    Create outfits to unlock your style profile
-                                </p>
+                                <div className="h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-[#d4af7f] to-[#b8860b] w-0"></div>
+                                </div>
                             </div>
+                            <div>
+                                <div className="flex justify-between mb-1">
+                                    <span className="text-sm text-gray-400">Formal</span>
+                                    <span className="text-sm text-[#d4af7f]">0%</span>
+                                </div>
+                                <div className="h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-[#d4af7f] to-[#b8860b] w-0"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between mb-1">
+                                    <span className="text-sm text-gray-400">Trendy</span>
+                                    <span className="text-sm text-[#d4af7f]">0%</span>
+                                </div>
+                                <div className="h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-[#d4af7f] to-[#b8860b] w-0"></div>
+                                </div>
+                            </div>
+                            <p className="text-xs text-gray-500 mt-4 text-center">
+                                Create outfits to unlock your style profile
+                            </p>
                         </div>
 
                         {/* Recommendations */}

@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/authContext";
+import { supabase } from "@/lib/supabase";
 
 /* ================= TYPES ================= */
 
@@ -268,6 +270,7 @@ export const QUESTIONS_MALE: Question[] = [
 
 export default function SuggestionsQuizPage() {
   const router = useRouter();
+  const { user } = useAuth();
 
   const [gender, setGender] = useState<"male" | "female" | null>(null);
   const [step, setStep] = useState(0);
@@ -275,11 +278,12 @@ export default function SuggestionsQuizPage() {
   const [isFinished, setIsFinished] = useState(false);
   const [multiSelection, setMultiSelection] = useState<Option[]>([]);
   const [feedbackMsg, setFeedbackMsg] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const currentQuestions =
     gender === "male" ? QUESTIONS_MALE : QUESTIONS_FEMALE;
 
-  /* ================= LOGIC (UNCHANGED) ================= */
+  /* ================= LOGIC ================= */
 
   const advanceWithFeedback = (msg: string) => {
     setFeedbackMsg(msg);
@@ -291,6 +295,23 @@ export default function SuggestionsQuizPage() {
         setIsFinished(true);
       }
     }, 1200);
+  };
+
+  const goBack = () => {
+    if (step > 0) {
+      // Remove the answer for the previous question so user can re-answer
+      const prevQ = currentQuestions[step - 1];
+      const newAnswers = { ...answers };
+      delete newAnswers[prevQ.key];
+      setAnswers(newAnswers);
+      setMultiSelection([]);
+      setStep(step - 1);
+    } else {
+      // If on the first question, go back to gender selection
+      setGender(null);
+      setStep(0);
+      setAnswers({});
+    }
   };
 
   const handleSingleSelect = (question: Question, option: Option) => {
@@ -378,15 +399,49 @@ export default function SuggestionsQuizPage() {
           </p>
 
           <button
-            onClick={() => {
+            disabled={saving}
+            onClick={async () => {
               const persona = result.title;
-              localStorage.setItem("userPersona", result.title);
+              localStorage.setItem("userPersona", persona);
+
+              // Save to Supabase if logged in
+              if (user) {
+                setSaving(true);
+                try {
+                  // Serialize answers for JSONB storage
+                  const scoreData: Record<string, any> = {};
+                  for (const [key, val] of Object.entries(answers)) {
+                    if (Array.isArray(val)) {
+                      scoreData[key] = val.map((v: Option) => v.label);
+                    } else if (val?.label) {
+                      scoreData[key] = val.label;
+                    } else {
+                      scoreData[key] = val;
+                    }
+                  }
+                  scoreData.gender = gender;
+
+                  const { error } = await supabase.from("quiz_result").insert({
+                    user_id: user.id,
+                    persona_name: persona,
+                    score: scoreData,
+                    email: user.email || "",
+                    gender: gender === "male" ? "Boy" : "Girl",
+                  });
+                  if (error) console.error("Error saving quiz result:", error);
+                } catch (err) {
+                  console.error("Failed to save quiz result:", err);
+                } finally {
+                  setSaving(false);
+                }
+              }
+
               router.push("/suggestions");
             }}
-            className="w-full py-4 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2"
+            className="w-full py-4 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <Icons.Sparkles className="w-5 h-5" />
-            Show Me My Fits
+            {saving ? "Saving..." : "Show Me My Fits"}
           </button>
 
           <button
@@ -400,6 +455,13 @@ export default function SuggestionsQuizPage() {
           >
             <Icons.Refresh className="w-4 h-4" />
             Start Over
+          </button>
+
+          <button
+            onClick={() => router.push("/")}
+            className="mt-3 text-gray-500 hover:text-white text-sm flex items-center justify-center gap-2 mx-auto"
+          >
+            🏠 Go Home
           </button>
         </div>
       </div>
@@ -431,7 +493,12 @@ export default function SuggestionsQuizPage() {
       <div className="w-full max-w-xl">
 
         <div className="flex justify-between text-sm text-gray-400 mb-6">
-          <span>Outfevibe</span>
+          <button
+            onClick={goBack}
+            className="hover:text-white transition flex items-center gap-1"
+          >
+            ← Back
+          </button>
           <span>{step + 1}/{currentQuestions.length}</span>
         </div>
 

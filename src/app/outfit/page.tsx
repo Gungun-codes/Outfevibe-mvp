@@ -2,19 +2,22 @@
 
 import { useState, useEffect, useRef } from "react";
 import outfits from "../../../data/outfits.json";
+import { useAuth } from "@/context/authContext";
+import { supabase } from "@/lib/supabase";
 
 type Outfit = {
   id: number;
   gender: string;
   occasion: string;
   mood: string;
-  color: string;
-  title: string;
+  color?: string;
+  title?: string;
   image: string;
-  affiliateLink: string;
+  affiliateLink?: string;
 };
 
 export default function OutfitChat() {
+  const { user } = useAuth();
   const [step, setStep] = useState(1);
   const [gender, setGender] = useState("");
   const [mood, setMood] = useState("");
@@ -38,7 +41,7 @@ export default function OutfitChat() {
     "Haldi",
     "Mehendi",
     "Sangeet",
-    "Bachelor’s",
+    "Bachelor's",
     "Wedding",
     "Valentine",
     "College Fest",
@@ -49,6 +52,28 @@ export default function OutfitChat() {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [step, results, typing]);
+
+  // Load saved outfits from Supabase on mount
+  useEffect(() => {
+    if (!user) return;
+    const loadSaved = async () => {
+      const { data, error } = await supabase
+        .from("ai_outfit_images")
+        .select("ai_suggestion")
+        .eq("user_id", user.id);
+      if (!error && data) {
+        // Extract outfit IDs from saved records
+        const savedIds = data
+          .map((row: any) => {
+            const match = row.ai_suggestion?.match(/\[ID:(\d+)\]/);
+            return match ? parseInt(match[1]) : null;
+          })
+          .filter((id: number | null): id is number => id !== null);
+        setSaved(savedIds);
+      }
+    };
+    loadSaved();
+  }, [user]);
 
   function simulateTyping(nextStep: number) {
     setTyping(true);
@@ -95,10 +120,34 @@ export default function OutfitChat() {
     setResults([]);
   }
 
-  function toggleSave(id: number) {
-    setSaved((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    );
+  async function toggleSave(id: number) {
+    const isAlreadySaved = saved.includes(id);
+
+    if (isAlreadySaved) {
+      // Unsave: remove from local state and Supabase
+      setSaved((prev) => prev.filter((i) => i !== id));
+      if (user) {
+        const { error } = await supabase
+          .from("ai_outfit_images")
+          .delete()
+          .eq("user_id", user.id)
+          .like("ai_suggestion", `%[ID:${id}]%`);
+        if (error) console.error("Error removing saved outfit:", error);
+      }
+    } else {
+      // Save: add to local state and Supabase
+      setSaved((prev) => [...prev, id]);
+      const outfit = results.find((r) => r.id === id);
+      if (user && outfit) {
+        const titleToSave = outfit.title || `${outfit.color ? outfit.color + ' ' : ''}${outfit.occasion} ${outfit.mood}`;
+        const { error } = await supabase.from("ai_outfit_images").insert({
+          user_id: user.id,
+          image_url: outfit.image,
+          ai_suggestion: `${titleToSave} [ID:${outfit.id}]`,
+        });
+        if (error) console.error("Error saving outfit:", error);
+      }
+    }
   }
 
   return (
@@ -247,20 +296,28 @@ export default function OutfitChat() {
                   >
                     <img
                       src={look.image}
-                      alt={look.title}
+                      alt={look.title || `${look.color ? look.color + ' ' : ''}${look.occasion} ${look.mood} look`}
                       className="w-full h-56 object-cover rounded-xl mb-3"
                     />
 
-                    <p className="font-semibold">{look.title}</p>
+                    <p className="font-semibold capitalize">
+                      {look.title || `${look.color ? look.color + ' ' : ''}${look.occasion} ${look.mood} Look`}
+                    </p>
 
                     <div className="flex gap-3 mt-3">
-                      <a
-                        href={look.affiliateLink}
-                        target="_blank"
-                        className="flex-1 bg-black text-white py-2 rounded-full text-center text-sm"
-                      >
-                        Try This Look
-                      </a>
+                      {look.affiliateLink ? (
+                        <a
+                          href={look.affiliateLink}
+                          target="_blank"
+                          className="flex-1 flex items-center justify-center bg-black text-white py-2 rounded-full text-center text-sm"
+                        >
+                          Try This Look
+                        </a>
+                      ) : (
+                        <span className="flex-1 flex items-center justify-center bg-gray-200 text-gray-500 py-2 rounded-full text-center text-sm cursor-not-allowed">
+                          Unavailable
+                        </span>
+                      )}
 
                       <button
                         onClick={() => toggleSave(look.id)}

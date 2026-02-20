@@ -9,8 +9,8 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@supabase/supabase-js/dist/index.mjs [app-client] (ecmascript) <locals>");
 ;
-const supabaseUrl = ("TURBOPACK compile-time value", "https://yrpycknngmfyzuzfudzo.supabase.co");
-const supabaseAnonKey = ("TURBOPACK compile-time value", "sb_publishable_Ruv_Rf1pm2udlnFJkprePA_nWSn-yTa");
+const supabaseUrl = ("TURBOPACK compile-time value", "https://mnctjlatbysdaudjhcql.supabase.co");
+const supabaseAnonKey = ("TURBOPACK compile-time value", "sb_publishable_Ekc95mUtTKFOujpmGIXWhA_Tx26QpkL");
 const supabase = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createClient"])(supabaseUrl, supabaseAnonKey);
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -51,10 +51,22 @@ const AuthProvider = ({ children })=>{
             }["AuthProvider.useEffect"]);
             // Listen for auth changes
             const { data: { subscription } } = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.onAuthStateChange({
-                "AuthProvider.useEffect": (_event, session)=>{
+                "AuthProvider.useEffect": async (event, session)=>{
                     setSession(session);
                     setUser(session?.user ?? null);
                     setLoading(false);
+                    // Save/update user profile on sign in (catches Google OAuth + email logins)
+                    if (event === "SIGNED_IN" && session?.user) {
+                        const u = session.user;
+                        const fullName = u.user_metadata?.full_name || u.user_metadata?.display_name || u.user_metadata?.name || u.email?.split("@")[0] || "";
+                        const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
+                            id: u.id,
+                            full_name: fullName
+                        }, {
+                            onConflict: "id"
+                        });
+                        if (error) console.error("Error saving user profile:", error);
+                    }
                 }
             }["AuthProvider.useEffect"]);
             return ({
@@ -80,15 +92,15 @@ const AuthProvider = ({ children })=>{
             }
         });
         if (error) throw error;
-        // Optionally store user data in users table
+        // Store user data in users_profile table
         if (data.user) {
-            const { error: dbError } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("users").upsert({
-                uid: data.user.id,
-                email: data.user.email,
-                display_name: displayName,
-                created_at: new Date().toISOString()
+            const { error: dbError } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
+                id: data.user.id,
+                full_name: displayName
+            }, {
+                onConflict: "id"
             });
-            if (dbError) console.error("Error saving user to database:", dbError);
+            if (dbError) console.error("Error saving user profile:", dbError);
         }
     };
     const loginWithGoogle = async ()=>{
@@ -117,7 +129,7 @@ const AuthProvider = ({ children })=>{
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/authContext.tsx",
-        lineNumber: 94,
+        lineNumber: 117,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

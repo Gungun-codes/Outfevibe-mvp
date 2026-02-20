@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/authContext";
+import { supabase } from "@/lib/supabase";
 
 /* -------------------- TYPES -------------------- */
 
@@ -200,12 +203,70 @@ const PERSONA_OUTFITS: Record<string, Outfit[]> = {
 
 export default function SuggestionsPage() {
 
+  const { user } = useAuth();
+  const router = useRouter();
   const [persona, setPersona] = useState<string | null>(null);
+  const [saved, setSaved] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const storedPersona = localStorage.getItem("userPersona");
     setPersona(storedPersona);
   }, []);
+
+  // Load previously saved suggestion outfits from Supabase
+  useEffect(() => {
+    if (!user) return;
+    const loadSaved = async () => {
+      const { data, error } = await supabase
+        .from("ai_outfit_images")
+        .select("ai_suggestion")
+        .eq("user_id", user.id);
+      if (!error && data) {
+        const ids = new Set<string>(
+          data
+            .map((row: any) => {
+              const match = row.ai_suggestion?.match(/\[SID:([^\]]+)\]/);
+              return match ? match[1] : null;
+            })
+            .filter(Boolean) as string[]
+        );
+        setSaved(ids);
+      }
+    };
+    loadSaved();
+  }, [user]);
+
+  const toggleSave = async (outfit: Outfit) => {
+    const isSaved = saved.has(outfit.id);
+
+    if (isSaved) {
+      // Unsave
+      setSaved((prev) => {
+        const next = new Set(prev);
+        next.delete(outfit.id);
+        return next;
+      });
+      if (user) {
+        const { error } = await supabase
+          .from("ai_outfit_images")
+          .delete()
+          .eq("user_id", user.id)
+          .like("ai_suggestion", `%[SID:${outfit.id}]%`);
+        if (error) console.error("Error removing saved outfit:", error);
+      }
+    } else {
+      // Save
+      setSaved((prev) => new Set(prev).add(outfit.id));
+      if (user) {
+        const { error } = await supabase.from("ai_outfit_images").insert({
+          user_id: user.id,
+          image_url: outfit.image,
+          ai_suggestion: `${outfit.title} - ${outfit.description} [SID:${outfit.id}]`,
+        });
+        if (error) console.error("Error saving outfit:", error);
+      }
+    }
+  };
 
   if (!persona) {
     return (
@@ -228,6 +289,12 @@ export default function SuggestionsPage() {
           <p className="text-gray-400 mt-3">
             Persona: {persona}
           </p>
+          <button
+            onClick={() => router.push("/")}
+            className="mt-4 text-gray-500 hover:text-white text-sm transition"
+          >
+            🏠 Go Home
+          </button>
         </div>
 
         <div className="grid md:grid-cols-2 gap-10">
@@ -246,9 +313,19 @@ export default function SuggestionsPage() {
                 <h2 className="text-xl font-semibold mb-2">
                   {outfit.title}
                 </h2>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-400 text-sm mb-4">
                   {outfit.description}
                 </p>
+
+                <button
+                  onClick={() => toggleSave(outfit)}
+                  className={`px-5 py-2 rounded-full text-sm border transition ${saved.has(outfit.id)
+                    ? "bg-white text-black border-white"
+                    : "border-gray-600 hover:border-white"
+                    }`}
+                >
+                  {saved.has(outfit.id) ? "✓ Saved" : "Save"}
+                </button>
               </div>
             </div>
           ))}

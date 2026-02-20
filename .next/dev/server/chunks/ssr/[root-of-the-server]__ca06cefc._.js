@@ -33,7 +33,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$authContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/context/authContext.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/supabase.ts [app-ssr] (ecmascript)");
 "use client";
+;
+;
 ;
 ;
 ;
@@ -49,12 +53,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navi
                 d: "m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"
             }, void 0, false, {
                 fileName: "[project]/src/app/quiz/page.tsx",
-                lineNumber: 42,
+                lineNumber: 44,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/src/app/quiz/page.tsx",
-            lineNumber: 41,
+            lineNumber: 43,
             columnNumber: 5
         }, ("TURBOPACK compile-time value", void 0)),
     Check: (props)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -67,12 +71,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navi
                 d: "M20 6 9 17l-5-5"
             }, void 0, false, {
                 fileName: "[project]/src/app/quiz/page.tsx",
-                lineNumber: 47,
+                lineNumber: 49,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/src/app/quiz/page.tsx",
-            lineNumber: 46,
+            lineNumber: 48,
             columnNumber: 5
         }, ("TURBOPACK compile-time value", void 0)),
     Refresh: (props)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -86,20 +90,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navi
                     d: "M3 12a9 9 0 0 1 9-9"
                 }, void 0, false, {
                     fileName: "[project]/src/app/quiz/page.tsx",
-                    lineNumber: 52,
+                    lineNumber: 54,
                     columnNumber: 7
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                     d: "M21 12a9 9 0 0 1-9 9"
                 }, void 0, false, {
                     fileName: "[project]/src/app/quiz/page.tsx",
-                    lineNumber: 53,
+                    lineNumber: 55,
                     columnNumber: 7
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/quiz/page.tsx",
-            lineNumber: 51,
+            lineNumber: 53,
             columnNumber: 5
         }, ("TURBOPACK compile-time value", void 0))
 };
@@ -874,14 +878,16 @@ const QUESTIONS_MALE = [
 ];
 function SuggestionsQuizPage() {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
+    const { user } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$context$2f$authContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAuth"])();
     const [gender, setGender] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [step, setStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [answers, setAnswers] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
     const [isFinished, setIsFinished] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [multiSelection, setMultiSelection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [feedbackMsg, setFeedbackMsg] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [saving, setSaving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const currentQuestions = gender === "male" ? QUESTIONS_MALE : QUESTIONS_FEMALE;
-    /* ================= LOGIC (UNCHANGED) ================= */ const advanceWithFeedback = (msg)=>{
+    /* ================= LOGIC ================= */ const advanceWithFeedback = (msg)=>{
         setFeedbackMsg(msg);
         setTimeout(()=>{
             setFeedbackMsg(null);
@@ -891,6 +897,24 @@ function SuggestionsQuizPage() {
                 setIsFinished(true);
             }
         }, 1200);
+    };
+    const goBack = ()=>{
+        if (step > 0) {
+            // Remove the answer for the previous question so user can re-answer
+            const prevQ = currentQuestions[step - 1];
+            const newAnswers = {
+                ...answers
+            };
+            delete newAnswers[prevQ.key];
+            setAnswers(newAnswers);
+            setMultiSelection([]);
+            setStep(step - 1);
+        } else {
+            // If on the first question, go back to gender selection
+            setGender(null);
+            setStep(0);
+            setAnswers({});
+        }
     };
     const handleSingleSelect = (question, option)=>{
         setAnswers({
@@ -939,7 +963,7 @@ function SuggestionsQuizPage() {
                         children: "OUTFEVIBE"
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 335,
+                        lineNumber: 356,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -951,7 +975,7 @@ function SuggestionsQuizPage() {
                                 children: "Style for Her"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 339,
+                                lineNumber: 360,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -960,24 +984,24 @@ function SuggestionsQuizPage() {
                                 children: "Style for Him"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 345,
+                                lineNumber: 366,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 338,
+                        lineNumber: 359,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/quiz/page.tsx",
-                lineNumber: 334,
+                lineNumber: 355,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/quiz/page.tsx",
-            lineNumber: 333,
+            lineNumber: 354,
             columnNumber: 7
         }, this);
     }
@@ -993,7 +1017,7 @@ function SuggestionsQuizPage() {
                         children: result.icon
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 366,
+                        lineNumber: 387,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1001,7 +1025,7 @@ function SuggestionsQuizPage() {
                         children: "You Are"
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 368,
+                        lineNumber: 389,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -1009,7 +1033,7 @@ function SuggestionsQuizPage() {
                         children: result.title
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 372,
+                        lineNumber: 393,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1017,29 +1041,60 @@ function SuggestionsQuizPage() {
                         children: result.desc
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 376,
+                        lineNumber: 397,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: ()=>{
+                        disabled: saving,
+                        onClick: async ()=>{
                             const persona = result.title;
-                            localStorage.setItem("userPersona", result.title);
+                            localStorage.setItem("userPersona", persona);
+                            // Save to Supabase if logged in
+                            if (user) {
+                                setSaving(true);
+                                try {
+                                    // Serialize answers for JSONB storage
+                                    const scoreData = {};
+                                    for (const [key, val] of Object.entries(answers)){
+                                        if (Array.isArray(val)) {
+                                            scoreData[key] = val.map((v)=>v.label);
+                                        } else if (val?.label) {
+                                            scoreData[key] = val.label;
+                                        } else {
+                                            scoreData[key] = val;
+                                        }
+                                    }
+                                    scoreData.gender = gender;
+                                    const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from("quiz_result").insert({
+                                        user_id: user.id,
+                                        persona_name: persona,
+                                        score: scoreData,
+                                        email: user.email || "",
+                                        gender: gender === "male" ? "Boy" : "Girl"
+                                    });
+                                    if (error) console.error("Error saving quiz result:", error);
+                                } catch (err) {
+                                    console.error("Failed to save quiz result:", err);
+                                } finally{
+                                    setSaving(false);
+                                }
+                            }
                             router.push("/suggestions");
                         },
-                        className: "w-full py-4 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2",
+                        className: "w-full py-4 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-50",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Icons.Sparkles, {
                                 className: "w-5 h-5"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 388,
+                                lineNumber: 443,
                                 columnNumber: 13
                             }, this),
-                            "Show Me My Fits"
+                            saving ? "Saving..." : "Show Me My Fits"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 380,
+                        lineNumber: 401,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1055,25 +1110,34 @@ function SuggestionsQuizPage() {
                                 className: "w-4 h-4"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 401,
+                                lineNumber: 456,
                                 columnNumber: 13
                             }, this),
                             "Start Over"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 392,
+                        lineNumber: 447,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: ()=>router.push("/"),
+                        className: "mt-3 text-gray-500 hover:text-white text-sm flex items-center justify-center gap-2 mx-auto",
+                        children: "🏠 Go Home"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/quiz/page.tsx",
+                        lineNumber: 460,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/quiz/page.tsx",
-                lineNumber: 364,
+                lineNumber: 385,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/quiz/page.tsx",
-            lineNumber: 363,
+            lineNumber: 384,
             columnNumber: 7
         }, this);
     }
@@ -1098,17 +1162,17 @@ function SuggestionsQuizPage() {
                         children: feedbackMsg
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 424,
+                        lineNumber: 486,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/quiz/page.tsx",
-                    lineNumber: 418,
+                    lineNumber: 480,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/quiz/page.tsx",
-                lineNumber: 416,
+                lineNumber: 478,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1117,11 +1181,13 @@ function SuggestionsQuizPage() {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex justify-between text-sm text-gray-400 mb-6",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                children: "Outfevibe"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: goBack,
+                                className: "hover:text-white transition flex items-center gap-1",
+                                children: "← Back"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 434,
+                                lineNumber: 496,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1132,13 +1198,13 @@ function SuggestionsQuizPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 435,
+                                lineNumber: 502,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 433,
+                        lineNumber: 495,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1146,7 +1212,7 @@ function SuggestionsQuizPage() {
                         children: currentQ.question
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 438,
+                        lineNumber: 505,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1166,7 +1232,7 @@ function SuggestionsQuizPage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/quiz/page.tsx",
-                                        lineNumber: 464,
+                                        lineNumber: 531,
                                         columnNumber: 17
                                     }, this),
                                     isSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1174,19 +1240,19 @@ function SuggestionsQuizPage() {
                                         children: "✔"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/quiz/page.tsx",
-                                        lineNumber: 469,
+                                        lineNumber: 536,
                                         columnNumber: 19
                                     }, this)
                                 ]
                             }, i, true, {
                                 fileName: "[project]/src/app/quiz/page.tsx",
-                                lineNumber: 451,
+                                lineNumber: 518,
                                 columnNumber: 15
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 442,
+                        lineNumber: 509,
                         columnNumber: 9
                     }, this),
                     currentQ.type === "multi" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1196,19 +1262,19 @@ function SuggestionsQuizPage() {
                         children: "Confirm Colors"
                     }, void 0, false, {
                         fileName: "[project]/src/app/quiz/page.tsx",
-                        lineNumber: 480,
+                        lineNumber: 547,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/quiz/page.tsx",
-                lineNumber: 431,
+                lineNumber: 493,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/quiz/page.tsx",
-        lineNumber: 414,
+        lineNumber: 476,
         columnNumber: 5
     }, this);
 }

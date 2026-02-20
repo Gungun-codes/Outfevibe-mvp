@@ -14,8 +14,8 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@supabase/supabase-js/dist/index.mjs [app-ssr] (ecmascript) <locals>");
 ;
-const supabaseUrl = ("TURBOPACK compile-time value", "https://yrpycknngmfyzuzfudzo.supabase.co");
-const supabaseAnonKey = ("TURBOPACK compile-time value", "sb_publishable_Ruv_Rf1pm2udlnFJkprePA_nWSn-yTa");
+const supabaseUrl = ("TURBOPACK compile-time value", "https://mnctjlatbysdaudjhcql.supabase.co");
+const supabaseAnonKey = ("TURBOPACK compile-time value", "sb_publishable_Ekc95mUtTKFOujpmGIXWhA_Tx26QpkL");
 const supabase = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$supabase$2f$supabase$2d$js$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createClient"])(supabaseUrl, supabaseAnonKey);
 }),
 "[project]/src/context/authContext.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
@@ -47,10 +47,22 @@ const AuthProvider = ({ children })=>{
             setLoading(false);
         });
         // Listen for auth changes
-        const { data: { subscription } } = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].auth.onAuthStateChange((_event, session)=>{
+        const { data: { subscription } } = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].auth.onAuthStateChange(async (event, session)=>{
             setSession(session);
             setUser(session?.user ?? null);
             setLoading(false);
+            // Save/update user profile on sign in (catches Google OAuth + email logins)
+            if (event === "SIGNED_IN" && session?.user) {
+                const u = session.user;
+                const fullName = u.user_metadata?.full_name || u.user_metadata?.display_name || u.user_metadata?.name || u.email?.split("@")[0] || "";
+                const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
+                    id: u.id,
+                    full_name: fullName
+                }, {
+                    onConflict: "id"
+                });
+                if (error) console.error("Error saving user profile:", error);
+            }
         });
         return ()=>subscription.unsubscribe();
     }, []);
@@ -72,15 +84,15 @@ const AuthProvider = ({ children })=>{
             }
         });
         if (error) throw error;
-        // Optionally store user data in users table
+        // Store user data in users_profile table
         if (data.user) {
-            const { error: dbError } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from("users").upsert({
-                uid: data.user.id,
-                email: data.user.email,
-                display_name: displayName,
-                created_at: new Date().toISOString()
+            const { error: dbError } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
+                id: data.user.id,
+                full_name: displayName
+            }, {
+                onConflict: "id"
             });
-            if (dbError) console.error("Error saving user to database:", dbError);
+            if (dbError) console.error("Error saving user profile:", dbError);
         }
     };
     const loginWithGoogle = async ()=>{
@@ -109,7 +121,7 @@ const AuthProvider = ({ children })=>{
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/authContext.tsx",
-        lineNumber: 94,
+        lineNumber: 117,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
