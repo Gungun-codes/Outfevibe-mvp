@@ -1067,6 +1067,10 @@
     border-style: dashed;
   }
 
+  .border-\[\#1a1a1a\] {
+    border-color: #1a1a1a;
+  }
+
   .border-\[\#1f1f1f\] {
     border-color: #1f1f1f;
   }
@@ -1099,13 +1103,13 @@
     border-color: var(--color-green-500);
   }
 
-  .border-red-500\/20 {
-    border-color: #fb2c3633;
+  .border-red-500\/10 {
+    border-color: #fb2c361a;
   }
 
   @supports (color: color-mix(in lab, red, red)) {
-    .border-red-500\/20 {
-      border-color: color-mix(in oklab, var(--color-red-500) 20%, transparent);
+    .border-red-500\/10 {
+      border-color: color-mix(in oklab, var(--color-red-500) 10%, transparent);
     }
   }
 
@@ -1484,6 +1488,10 @@
     padding-top: calc(var(--spacing) * 6);
   }
 
+  .pt-8 {
+    padding-top: calc(var(--spacing) * 8);
+  }
+
   .pt-20 {
     padding-top: calc(var(--spacing) * 20);
   }
@@ -1620,6 +1628,10 @@
 
   .whitespace-nowrap {
     white-space: nowrap;
+  }
+
+  .text-\[\#2a2a2a\] {
+    color: #2a2a2a;
   }
 
   .text-\[\#d4af7f\] {
@@ -1943,13 +1955,13 @@
   }
 
   @media (hover: hover) {
-    .hover\:bg-red-500\/20:hover {
-      background-color: #fb2c3633;
+    .hover\:bg-red-500\/10:hover {
+      background-color: #fb2c361a;
     }
 
     @supports (color: color-mix(in lab, red, red)) {
-      .hover\:bg-red-500\/20:hover {
-        background-color: color-mix(in oklab, var(--color-red-500) 20%, transparent);
+      .hover\:bg-red-500\/10:hover {
+        background-color: color-mix(in oklab, var(--color-red-500) 10%, transparent);
       }
     }
   }
@@ -2092,6 +2104,12 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:block {
+      display: block;
+    }
+  }
+
+  @media (min-width: 40rem) {
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -2100,6 +2118,18 @@
   @media (min-width: 40rem) {
     .sm\:flex-row {
       flex-direction: row;
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:items-center {
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:gap-4 {
+      gap: calc(var(--spacing) * 4);
     }
   }
 
@@ -2148,12 +2178,6 @@
   @media (min-width: 48rem) {
     .md\:flex-row {
       flex-direction: row;
-    }
-  }
-
-  @media (min-width: 48rem) {
-    .md\:items-center {
-      align-items: center;
     }
   }
 

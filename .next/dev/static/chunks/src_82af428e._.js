@@ -61,7 +61,8 @@ const AuthProvider = ({ children })=>{
                         const fullName = u.user_metadata?.full_name || u.user_metadata?.display_name || u.user_metadata?.name || u.email?.split("@")[0] || "";
                         const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
                             id: u.id,
-                            full_name: fullName
+                            full_name: fullName,
+                            email: u.email || ""
                         }, {
                             onConflict: "id"
                         });
@@ -92,15 +93,20 @@ const AuthProvider = ({ children })=>{
             }
         });
         if (error) throw error;
-        // Store user data in users_profile table
+        // Store user data in users_profile table (non-fatal if it fails)
         if (data.user) {
-            const { error: dbError } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
-                id: data.user.id,
-                full_name: displayName
-            }, {
-                onConflict: "id"
-            });
-            if (dbError) console.error("Error saving user profile:", dbError);
+            try {
+                const { error: dbError } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].from("users_profile").upsert({
+                    id: data.user.id,
+                    full_name: displayName,
+                    email: data.user.email || ""
+                }, {
+                    onConflict: "id"
+                });
+                if (dbError) console.error("Error saving user profile:", dbError);
+            } catch (profileErr) {
+                console.error("Profile creation failed (non-fatal):", profileErr);
+            }
         }
     };
     const loginWithGoogle = async ()=>{
@@ -113,8 +119,9 @@ const AuthProvider = ({ children })=>{
         if (error) throw error;
     };
     const logout = async ()=>{
-        const { error } = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.signOut();
-        if (error) throw error;
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$supabase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].auth.signOut();
+        // Force a hard redirect to clear all state properly
+        window.location.href = "/";
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AuthContext.Provider, {
         value: {
@@ -129,7 +136,7 @@ const AuthProvider = ({ children })=>{
         children: children
     }, void 0, false, {
         fileName: "[project]/src/context/authContext.tsx",
-        lineNumber: 117,
+        lineNumber: 124,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

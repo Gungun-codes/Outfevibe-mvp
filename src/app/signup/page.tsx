@@ -39,7 +39,8 @@ export default function SignupPage() {
             setLoading(true);
             setError("");
             await signup(email, password, name);
-            // Auth state change will handle redirect
+            // Redirect after signup — auth listener may be delayed
+            router.push("/");
         } catch (err: any) {
             setError(err.message || "Signup failed. Please try again.");
             setLoading(false);

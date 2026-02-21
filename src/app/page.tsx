@@ -26,13 +26,17 @@ export default function Home() {
     }
     try {
       setLoading(true);
+      const insertData: any = {
+        message: `Name: ${name}\n\nMessage: ${message}`,
+        created_at: new Date().toISOString(),
+      };
+      if (user) {
+        insertData.user_id = user.id;
+      }
+
       const { error } = await supabase
         .from("feedback")
-        .insert({
-          name: name,
-          message: message,
-          created_at: new Date().toISOString(),
-        });
+        .insert(insertData);
 
       if (error) throw error;
 

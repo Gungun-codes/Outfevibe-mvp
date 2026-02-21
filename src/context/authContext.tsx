@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                         {
                             id: u.id,
                             full_name: fullName,
+                            email: u.email || "",
                         },
                         { onConflict: "id" }
                     );
@@ -83,18 +84,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         });
         if (error) throw error;
 
-        // Store user data in users_profile table
+        // Store user data in users_profile table (non-fatal if it fails)
         if (data.user) {
-            const { error: dbError } = await supabase
-                .from("users_profile")
-                .upsert(
-                    {
-                        id: data.user.id,
-                        full_name: displayName,
-                    },
-                    { onConflict: "id" }
-                );
-            if (dbError) console.error("Error saving user profile:", dbError);
+            try {
+                const { error: dbError } = await supabase
+                    .from("users_profile")
+                    .upsert(
+                        {
+                            id: data.user.id,
+                            full_name: displayName,
+                            email: data.user.email || "",
+                        },
+                        { onConflict: "id" }
+                    );
+                if (dbError) console.error("Error saving user profile:", dbError);
+            } catch (profileErr) {
+                console.error("Profile creation failed (non-fatal):", profileErr);
+            }
         }
     };
 
@@ -109,8 +115,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const logout = async () => {
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
+        await supabase.auth.signOut();
+        // Force a hard redirect to clear all state properly
+        window.location.href = "/";
     };
 
     return (

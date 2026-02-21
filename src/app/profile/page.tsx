@@ -63,20 +63,16 @@ export default function ProfilePage() {
             <div className="max-w-7xl mx-auto">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                            Hi, <span className="text-[#d4af7f]">{displayName.split(" ")[0]}</span> 👋
-                        </h1>
-                        <p className="text-gray-400">Welcome to your style dashboard.</p>
+                <div className="mb-10">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
+                        Hi, <span className="text-[#d4af7f]">{displayName.split(" ")[0]}</span> 👋
+                    </h1>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-2">
+                        <p className="text-white font-semibold text-lg">{displayName}</p>
+                        <span className="hidden sm:block text-[#2a2a2a]">|</span>
+                        <p className="text-gray-400 text-sm font-mono">{user.email}</p>
                     </div>
-                    <button
-                        onClick={() => logout()}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition text-sm font-medium border border-red-500/20"
-                    >
-                        <LogOut className="w-4 h-4" />
-                        Sign Out
-                    </button>
+                    <p className="text-gray-500 text-sm mt-4">Welcome to your style dashboard.</p>
                 </div>
 
                 {/* Quick Actions */}
@@ -175,8 +171,6 @@ export default function ProfilePage() {
                     <div className="space-y-8">
 
                         {/* Style Persona Card */}
-
-                        {/* Style Persona Card */}
                         <div className="bg-[#111] rounded-2xl p-6 border border-[#2a2a2a]">
                             <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                                 <Sparkles className="w-5 h-5 text-[#d4af7f]" />
@@ -271,6 +265,18 @@ export default function ProfilePage() {
                 </div>
 
             </div>
+
+            {/* Sign Out — bottom of page cleanly separated */}
+            <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#1a1a1a] flex justify-center">
+                <button
+                    onClick={() => logout()}
+                    className="flex items-center gap-3 px-8 py-3 rounded-2xl bg-[#111] text-red-400 hover:text-red-300 hover:bg-red-500/10 transition font-medium border border-red-500/10 hover:border-500/30 text-sm tracking-wide"
+                >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                </button>
+            </div>
+
         </div>
     );
 }
