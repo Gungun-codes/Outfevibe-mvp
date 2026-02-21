@@ -12,12 +12,27 @@ export default function ProfilePage() {
     const router = useRouter();
     const [persona, setPersona] = useState<string | null>(null);
     const [quizGender, setQuizGender] = useState<string | null>(null);
+    const [dbName, setDbName] = useState<string | null>(null);
 
     useEffect(() => {
         if (!loading && !user) {
             router.push("/login");
         }
     }, [user, loading, router]);
+
+    // Fetch full name from users_profile (works for both email + Google signup)
+    useEffect(() => {
+        if (!user) return;
+        const fetchName = async () => {
+            const { data } = await supabase
+                .from("users_profile")
+                .select("full_name")
+                .eq("id", user.id)
+                .single();
+            if (data?.full_name) setDbName(data.full_name);
+        };
+        fetchName();
+    }, [user]);
 
     // Load persona from Supabase
     useEffect(() => {
@@ -52,8 +67,14 @@ export default function ProfilePage() {
             .toUpperCase();
     };
 
-    // Get user display data from Supabase user metadata
-    const displayName = user.user_metadata?.display_name || user.email?.split('@')[0] || "User";
+    // Resolve display name: prefer DB value, fall back to metadata, then email prefix
+    const displayName =
+        dbName ||
+        user.user_metadata?.display_name ||
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.email?.split("@")[0] ||
+        "You";
     const photoURL = user.user_metadata?.avatar_url || null;
     const createdAt = user.created_at ? new Date(user.created_at).toLocaleDateString() : 'Recently';
     const memberSince = user.created_at ? new Date(user.created_at).getFullYear() : new Date().getFullYear();
@@ -64,15 +85,15 @@ export default function ProfilePage() {
 
                 {/* Header */}
                 <div className="mb-10">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-                        Hi, <span className="text-[#d4af7f]">{displayName.split(" ")[0]}</span> 👋
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2">
+                        Hi,{" "}
+                        <span className="text-[#d4af7f]">{displayName}</span>{" "}
+                        👋
                     </h1>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-2">
-                        <p className="text-white font-semibold text-lg">{displayName}</p>
-                        <span className="hidden sm:block text-[#2a2a2a]">|</span>
-                        <p className="text-gray-400 text-sm font-mono">{user.email}</p>
-                    </div>
-                    <p className="text-gray-500 text-sm mt-4">Welcome to your style dashboard.</p>
+                    <p className="text-gray-400 text-sm font-mono tracking-widest uppercase mt-2 letter-spacing-wider">
+                        {user.email}
+                    </p>
+                    <p className="text-gray-600 text-xs mt-3 tracking-wide">Welcome to your style dashboard.</p>
                 </div>
 
                 {/* Quick Actions */}
